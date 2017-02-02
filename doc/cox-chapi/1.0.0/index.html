@@ -26,7 +26,7 @@
     
 
 
-    <h3>cloud-health-api 1.0.0</h3>
+    <h3>cox-chapi 1.0.0</h3>
 
 
 
@@ -43,17 +43,15 @@
 
 
     <section>
-        <article><h1>cloud-health-api</h1><p>Note: This node module is developed entirely separate from the CloudHealth application. This module is not guaranteed to always function properly with CloudHealth's API due to the potential of it changing and the fact that this module is not maintained by the same developers that developed the CloudHealth application or API</p>
+        <article><h1>chapi</h1><p>Note: This node module is developed entirely separate from the CloudHealth application. This module is not guaranteed to always function properly with CloudHealth's API due to the potential of their API changing and the fact that this module is not maintained by the same developers that developed the CloudHealth application or API. However, we are in contact with CloudHealth and will update this tool to cover changes to their API.</p>
 <h2>Installation</h2><p>This package can be installed as a command-line util by running</p>
-<pre class="prettyprint source lang-bash"><code>git clone &lt;the-name-of-this-repo>
-npm install -g cloud-health-api/</code></pre><p>or as a module to be used in a node.js project</p>
-<pre class="prettyprint source lang-bash"><code>git clone &lt;the-name-of-this-repo>
-npm install cloud-health-api/</code></pre><p>which can then be used in a Node.js script by requiring <code>cloud-health-api</code></p>
+<pre class="prettyprint source lang-bash"><code>npm install -g cox-chapi</code></pre><p>or as a module to be used in a node.js project</p>
+<pre class="prettyprint source lang-bash"><code>npm install cox-chapi --save</code></pre><p>which can then be used in a Node.js script by requiring <code>cox-chapi</code></p>
 <h2>Usage</h2><p>The main export of this module is the CloudHealth namespace. It contains classes such as Account, Asset, and Perspective from which objects can be instantiated that contain functions to make API calls to CloudHealth. Instantiating each class takes one argument: your CloudHealth api key. This key can be reset by calling the object's set_api_key method with your api key as the first argument. A valid api key is required for any of the object's methods to work.</p>
 <p>To use the module in Node.js, first require the module:</p>
-<pre class="prettyprint source lang-javascript"><code>var CloudHealth = require('cloud-health-api');</code></pre><p>Then instantiate an object from the class of whichever CloudHealth API you want to use:</p>
+<pre class="prettyprint source lang-javascript"><code>var CloudHealth = require('cox-chapi');</code></pre><p>Then instantiate an object from the class of whichever CloudHealth API you want to use:</p>
 <pre class="prettyprint source lang-javascript"><code>var account = new CloudHealth.Account('&lt;your-cloudhealth-api-key>');</code></pre><p>Now you can begin calling the object's methods. Each method takes a requestCallback that will be given two items: an error and the return data. If the call succeeds, the error will be null and the data field will contain your data, otherwise the error will be an error object and the data field may contain information useful for debugging. For example, the following script will get and print an account with the id '1234567890' on success, or throw an error on failure:</p>
-<pre class="prettyprint source lang-javascript"><code>var CloudHealth = require('cloud-health-api');
+<pre class="prettyprint source lang-javascript"><code>var CloudHealth = require('cox-chapi');
 var account = new CloudHealth.Account('sdafa-asdf-dsfasdf-asdf');
 
 account.get(1234567890, function(err, data) {
@@ -66,9 +64,9 @@ account.get(1234567890, function(err, data) {
 });</code></pre><p>For further documentation of methods, see <a href="./doc/DOC.md">Documentation</a></p>
 <p>This module can also be used from the command-line. To see how to use this module from the command-line see <a href="#command-line">Command Line</a></p>
 <h4>Extra Utilities</h4><p>Some of the functions used by this module can be found in the utils/chapi.js file. In Node.js, these functions can be accessed through</p>
-<pre class="prettyprint source lang-javascript"><code>var CloudHealth = require('cloud-health-api');
+<pre class="prettyprint source lang-javascript"><code>var CloudHealth = require('cox-chapi');
 var utils = CloudHealth.utils;</code></pre><h2>Examples</h2><p>Examples can be found in the examples folder under the folder for their component name (ie. Account examples are in examples/account). The examples assume the existence of the file examples/config.js which contains a JSON object like <code>{&quot;api_key&quot;: &quot;&lt;your-api-key&gt;&quot;}</code>. Create this file with your api key if you wish to see the examples work. You may also need to change some of the dummy data used in the examples in order for them to grab actual data</p>
-<h2>Documentation</h2><p>HTML pages containing documentation for all components of this module can be found in <code>/doc/cloud-health-api/1.0.0</code> or the same information can be found in a markdown file at <code>doc/Doc.md</code>. Note: To view the html pages, download them and open them with your browser</p>
+<h2>Documentation</h2><p>HTML pages containing documentation for all components of this module can be found in <code>/doc/cox-chapi/1.0.0</code> or the same information can be found in a markdown file at <code>doc/Doc.md</code>. Note: To view the html pages, download them and open them with your browser</p>
 <h2>Command Line</h2><h4>Setup</h4><p>On top of being an npm module that can be used with other node.js code, this module creates a command-line utility called <code>chapi</code>. To get this command line utility, run <code>npm install -g &lt;the-name-of-this-repo&gt;</code>.</p>
 <p>The utility works by first setting up your API key by getting an API key from CloudHealth and calling</p>
 <pre class="prettyprint source lang-bash"><code>chapi set_api_key &lt;your-cloudhealth-api-key></code></pre><p>This only needs to be done once. This command will create a json object named .cloudhealthapi.json in your home directory containing your API key for use in future calls to the chapi command-line tool.</p>
@@ -548,8 +546,8 @@ var utils = CloudHealth.utils;</code></pre><h2>Examples</h2><p>Examples can be f
             <div class="description">provides methods for adding, changing, and removing tags from
            accounts and assets via CloudHealth's API (to get a list of tags
            for an asset or account, see
-           <a href="module-cloud-health-api.Asset.html#query">asset api</a> or
-           <a href="module-cloud-health-api.Account.html#get">account api</a>)</div>
+           <a href="module-cox-chapi.Asset.html#query">asset api</a> or
+           <a href="module-cox-chapi.Account.html#get">account api</a>)</div>
         
 
         
@@ -754,7 +752,7 @@ var utils = CloudHealth.utils;</code></pre><h2>Examples</h2><p>Examples can be f
     
         
             <div class="description">this library provides several shared functions that are used
-           throughout the cloud-health-api module</div>
+           throughout the cox-chapi module</div>
         
 
         
@@ -938,13 +936,13 @@ var utils = CloudHealth.utils;</code></pre><h2>Examples</h2><p>Examples can be f
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-cloud-health-api.html">cloud-health-api</a></li></ul><h3>Classes</h3><ul><li><a href="module-cloud-health-api.Account.html">Account</a></li><li><a href="module-cloud-health-api.Asset.html">Asset</a></li><li><a href="module-cloud-health-api.Perspective.html">Perspective</a></li><li><a href="module-cloud-health-api.Report.html">Report</a></li><li><a href="module-cloud-health-api.Tag.html">Tag</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-cloud-health-api.commands.html">commands</a></li><li><a href="module-cloud-health-api.utils.html">utils</a></li></ul><h3>Global</h3><ul><li><a href="global.html#get_package_json">get_package_json</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-cox-chapi.html">cox-chapi</a></li></ul><h3>Classes</h3><ul><li><a href="module-cox-chapi.Account.html">Account</a></li><li><a href="module-cox-chapi.Asset.html">Asset</a></li><li><a href="module-cox-chapi.Perspective.html">Perspective</a></li><li><a href="module-cox-chapi.Report.html">Report</a></li><li><a href="module-cox-chapi.Tag.html">Tag</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-cox-chapi.commands.html">commands</a></li><li><a href="module-cox-chapi.utils.html">utils</a></li></ul><h3>Global</h3><ul><li><a href="global.html#get_package_json">get_package_json</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Tue Dec 13 2016 18:55:04 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Thu Feb 02 2017 17:58:50 GMT-0500 (EST)
 </footer>
 
 <script> prettyPrint(); </script>

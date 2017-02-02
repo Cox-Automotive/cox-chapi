@@ -9,7 +9,7 @@ var CloudHealth = require('..');
 var utils = CloudHealth.utils;
 
 /**
- *  @namespace module:cloud-health-api.commands
+ *  @namespace module:cox-chapi.commands
  */
 var commands = {
   make_api_call,
@@ -25,7 +25,7 @@ var commands = {
 
 /**
  *  makes an api call by calling <component_name>#<func_name> with params
- *  @memberof module:cloud-health-api.commands
+ *  @memberof module:cox-chapi.commands
  *  @param {string} component_name - the name of the component to call func_name on
  *  @param {string} func_name - the name of the function to call
  *  @param {string[]} params - an array of parameters to give to func_name
@@ -44,7 +44,7 @@ function make_api_call(component_name, func_name, params, cb) {
 
 /**
  *  resolves a name of a component and retrieves the actual component
- *  @memberof module:cloud-health-api.commands
+ *  @memberof module:cox-chapi.commands
  *  @param {string} name - the name of the component
  *  @param {string} [api_key] - the api_key to use when creating the component
  *  @return {object} the component object
@@ -79,7 +79,7 @@ function resolve_component(name, api_key) {
 
 /**
  *  calls the appropriate command based on the given arguments
- *  @memberof module:cloud-health-api.commands
+ *  @memberof module:cox-chapi.commands
  *  @param {string[]} args - and array of arguments
  */
 function resolve_inputs(args) {
@@ -118,7 +118,7 @@ function resolve_inputs(args) {
 
 /**
  *  retrieves the function with the given name for the given component
- *  @memberof module:cloud-health-api.commands
+ *  @memberof module:cox-chapi.commands
  *  @param {object} component - the component object containing the desired function
  *  @param {string} func_name - the name of the function to retrieve
  *  @return {function} the function
@@ -137,7 +137,7 @@ function resolve_func(component, func_name) {
 
 /**
  *  executes a script in the scripts folder with the given arguments
- *  @memberof module:cloud-health-api.commands
+ *  @memberof module:cox-chapi.commands
  *  @param {string} name - the name of the script
  */
 function run_script(name, ...args) {
@@ -146,7 +146,7 @@ function run_script(name, ...args) {
 
 /**
  *  sets the api key and prints a message on success
- *  @memberof module:cloud-health-api.commands
+ *  @memberof module:cox-chapi.commands
  *  @param {string} api_key - the api key to set
  */
 function set_api_key(api_key) {
@@ -158,7 +158,7 @@ function set_api_key(api_key) {
 
 /**
  *  prints a message explaining the usage of the tool
- *  @memberof module:cloud-health-api.commands
+ *  @memberof module:cox-chapi.commands
  */
 function show_help() {
   console.error(
@@ -174,7 +174,7 @@ chapi <component> <function> [<flags>] [<other-arguments>]
 
 /**
  *  prints the name and version number of this tool
- *  @memberof module:cloud-health-api.commands
+ *  @memberof module:cox-chapi.commands
  */
 function show_version() {
   utils.get_package_json((err, json) => {
@@ -186,7 +186,7 @@ function show_version() {
 /**
  *  reads parameters from stdin (if any), adds them to the list of params, and
  *  makes an api call based on the given args
- *  @memberof module:cloud-health-api.commands
+ *  @memberof module:cox-chapi.commands
  *  @param {string[]} args - an array in the form [component, function, parameters]
  */
 function use_api(args) {

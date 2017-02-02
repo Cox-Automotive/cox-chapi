@@ -2,8 +2,8 @@
  *  @overview provides methods for adding, changing, and removing tags from
  *            accounts and assets via CloudHealth's API (to get a list of tags
  *            for an asset or account, see
- *            {@link module:cloud-health-api.Asset#query|asset api} or
- *            {@link module:cloud-health-api.Account#get|account api})
+ *            {@link module:cox-chapi.Asset#query|asset api} or
+ *            {@link module:cox-chapi.Account#get|account api})
  *  @see {@link https://github.com/cloudhealth/cht_api_guide/blob/master/customer_tags_api.md|cht_api_guide}
  *  @author Ben Watson <ben.watson@coxautoinc.com>
  */
@@ -12,7 +12,7 @@ var utils = require('../utils/chapi');
 
 /**
  *  @class Tag
- *  @memberof module:cloud-health-api
+ *  @memberof module:cox-chapi
  *  @param {string} [api_key]
  */
 var Tag = function(api_key) {
@@ -21,7 +21,7 @@ var Tag = function(api_key) {
 
 /**
  *  sets the api key to use when making calls to CloudHealth's API
- *  @function module:cloud-health-api.Tag#set_api_key
+ *  @function module:cox-chapi.Tag#set_api_key
  *  @param {string} api_key
  */
 Tag.prototype.set_api_key = function(api_key) {
@@ -43,7 +43,7 @@ Tag.prototype._options = function(method, path, params) {
 
 /**
  *  adds/updates tags for an account or asset
- *  @function module:cloud-health-api.Tag#set
+ *  @function module:cox-chapi.Tag#set
  *  @param {number} aws_id - the aws id (owner_id) of the account
  *  @param {string} [asset_id] - the id of the asset
  *  @param {object} tags - the tags to set
@@ -111,7 +111,7 @@ Tag.prototype._set_cb = function(aws_id, asset_id, tags, cb, err, result) {
 
 /**
  *  delete tags from an account or asset
- *  @function module:cloud-health-api.Tag#delete
+ *  @function module:cox-chapi.Tag#delete
  *  @param {number} aws_id - the aws id (owner_id) of the account
  *  @param {string} [asset_id] - the id of the asset
  *  @param {string[]|object} tags - the tags to delete

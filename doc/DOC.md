@@ -1,7 +1,7 @@
 ## Modules
 
 <dl>
-<dt><a href="#module_cloud-health-api">cloud-health-api</a></dt>
+<dt><a href="#module_cox-chapi">cox-chapi</a></dt>
 <dd></dd>
 </dl>
 
@@ -26,94 +26,94 @@
 <dd></dd>
 </dl>
 
-<a name="module_cloud-health-api"></a>
+<a name="module_cox-chapi"></a>
 
-## cloud-health-api
+## cox-chapi
 
-* [cloud-health-api](#module_cloud-health-api)
-    * [.Account](#module_cloud-health-api.Account)
-        * [new Account([api_key])](#new_module_cloud-health-api.Account_new)
-        * [.set_api_key(api_key)](#module_cloud-health-api.Account+set_api_key)
-        * [.list([flags], cb)](#module_cloud-health-api.Account+list)
-        * [.get(id, cb)](#module_cloud-health-api.Account+get)
-        * [.find_by(field, value, [list], cb)](#module_cloud-health-api.Account+find_by)
-        * [.create(account, cb)](#module_cloud-health-api.Account+create)
-        * [.update(account, cb)](#module_cloud-health-api.Account+update)
-        * [.destroy(id, cb)](#module_cloud-health-api.Account+destroy)
-    * [.Asset](#module_cloud-health-api.Asset)
-        * [new Asset([api_key])](#new_module_cloud-health-api.Asset_new)
-        * [.set_api_key(api_key)](#module_cloud-health-api.Asset+set_api_key)
-        * [.list_types(cb)](#module_cloud-health-api.Asset+list_types)
-        * [.fields_for(asset_type, cb)](#module_cloud-health-api.Asset+fields_for)
-        * [.query(match, cb)](#module_cloud-health-api.Asset+query)
-    * [.Perspective](#module_cloud-health-api.Perspective)
-        * [new Perspective([api_key])](#new_module_cloud-health-api.Perspective_new)
-        * [.set_api_key(api_key)](#module_cloud-health-api.Perspective+set_api_key)
-        * [.get([flags], id, cb)](#module_cloud-health-api.Perspective+get)
-        * [.list_groups(pers, cb)](#module_cloud-health-api.Perspective+list_groups)
-        * [.add_to_group(pers, accts, group_name, cb)](#module_cloud-health-api.Perspective+add_to_group)
-        * [.list([flags], cb)](#module_cloud-health-api.Perspective+list)
-        * [.create(perspective, cb)](#module_cloud-health-api.Perspective+create)
-        * [.update(perspective, cb)](#module_cloud-health-api.Perspective+update)
-        * [.destroy([flags], id, cb)](#module_cloud-health-api.Perspective+destroy)
-    * [.Report](#module_cloud-health-api.Report)
-        * [new Report([api_key])](#new_module_cloud-health-api.Report_new)
-        * [.set_api_key(api_key)](#module_cloud-health-api.Report+set_api_key)
-        * [.list([flags], [topic], cb)](#module_cloud-health-api.Report+list)
-        * [.get(id, cb)](#module_cloud-health-api.Report+get)
-        * [.dimensions([flags], base, cb)](#module_cloud-health-api.Report+dimensions)
-        * [.generate(base, x, y, category, [interval], cb)](#module_cloud-health-api.Report+generate)
-    * [.Tag](#module_cloud-health-api.Tag)
-        * [new Tag([api_key])](#new_module_cloud-health-api.Tag_new)
-        * [.set_api_key(api_key)](#module_cloud-health-api.Tag+set_api_key)
-        * [.set(aws_id, [asset_id], tags, cb)](#module_cloud-health-api.Tag+set)
-        * [.delete(aws_id, [asset_id], tags, cb)](#module_cloud-health-api.Tag+delete)
-    * [.utils](#module_cloud-health-api.utils) : <code>object</code>
-        * [.execute(component, func, params, [cb])](#module_cloud-health-api.utils.execute)
-        * [.find_api_key(cb)](#module_cloud-health-api.utils.find_api_key)
-        * [.find_cache(cb)](#module_cloud-health-api.utils.find_cache)
-        * ~~[.find_creds(cb)](#module_cloud-health-api.utils.find_creds)~~
-        * [.parse_chapi(params)](#module_cloud-health-api.utils.parse_chapi) ⇒ <code>Array</code>
-        * [.print_response(err, res)](#module_cloud-health-api.utils.print_response)
-        * [.read_stdin(cb)](#module_cloud-health-api.utils.read_stdin)
-        * [.run(script)](#module_cloud-health-api.utils.run) ⇒ <code>EventEmitter</code>
-        * [.send_request([flags], options, send_data, cb)](#module_cloud-health-api.utils.send_request)
-        * [.set_api_key(api_key, [cb])](#module_cloud-health-api.utils.set_api_key)
-        * [.set_cache(cache_name, cache, [cb])](#module_cloud-health-api.utils.set_cache)
-        * ~~[.set_creds(api_key, [cb])](#module_cloud-health-api.utils.set_creds)~~
-    * [.commands](#module_cloud-health-api.commands) : <code>object</code>
-        * [.make_api_call(component_name, func_name, params, cb)](#module_cloud-health-api.commands.make_api_call)
-        * [.resolve_component(name, [api_key])](#module_cloud-health-api.commands.resolve_component) ⇒ <code>object</code>
-        * [.resolve_inputs(args)](#module_cloud-health-api.commands.resolve_inputs)
-        * [.resolve_func(component, func_name)](#module_cloud-health-api.commands.resolve_func) ⇒ <code>function</code>
-        * [.run_script(name)](#module_cloud-health-api.commands.run_script)
-        * [.set_api_key(api_key)](#module_cloud-health-api.commands.set_api_key)
-        * [.show_help()](#module_cloud-health-api.commands.show_help)
-        * [.show_version()](#module_cloud-health-api.commands.show_version)
-        * [.use_api(args)](#module_cloud-health-api.commands.use_api)
-
-
--
-
-<a name="module_cloud-health-api.Account"></a>
-
-### cloud-health-api.Account
-**Kind**: static class of <code>[cloud-health-api](#module_cloud-health-api)</code>  
-
-* [.Account](#module_cloud-health-api.Account)
-    * [new Account([api_key])](#new_module_cloud-health-api.Account_new)
-    * [.set_api_key(api_key)](#module_cloud-health-api.Account+set_api_key)
-    * [.list([flags], cb)](#module_cloud-health-api.Account+list)
-    * [.get(id, cb)](#module_cloud-health-api.Account+get)
-    * [.find_by(field, value, [list], cb)](#module_cloud-health-api.Account+find_by)
-    * [.create(account, cb)](#module_cloud-health-api.Account+create)
-    * [.update(account, cb)](#module_cloud-health-api.Account+update)
-    * [.destroy(id, cb)](#module_cloud-health-api.Account+destroy)
+* [cox-chapi](#module_cox-chapi)
+    * [.Account](#module_cox-chapi.Account)
+        * [new Account([api_key])](#new_module_cox-chapi.Account_new)
+        * [.set_api_key(api_key)](#module_cox-chapi.Account+set_api_key)
+        * [.list([flags], cb)](#module_cox-chapi.Account+list)
+        * [.get(id, cb)](#module_cox-chapi.Account+get)
+        * [.find_by(field, value, [list], cb)](#module_cox-chapi.Account+find_by)
+        * [.create(account, cb)](#module_cox-chapi.Account+create)
+        * [.update(account, cb)](#module_cox-chapi.Account+update)
+        * [.destroy(id, cb)](#module_cox-chapi.Account+destroy)
+    * [.Asset](#module_cox-chapi.Asset)
+        * [new Asset([api_key])](#new_module_cox-chapi.Asset_new)
+        * [.set_api_key(api_key)](#module_cox-chapi.Asset+set_api_key)
+        * [.list_types(cb)](#module_cox-chapi.Asset+list_types)
+        * [.fields_for(asset_type, cb)](#module_cox-chapi.Asset+fields_for)
+        * [.query(match, cb)](#module_cox-chapi.Asset+query)
+    * [.Perspective](#module_cox-chapi.Perspective)
+        * [new Perspective([api_key])](#new_module_cox-chapi.Perspective_new)
+        * [.set_api_key(api_key)](#module_cox-chapi.Perspective+set_api_key)
+        * [.get([flags], id, cb)](#module_cox-chapi.Perspective+get)
+        * [.list_groups(pers, cb)](#module_cox-chapi.Perspective+list_groups)
+        * [.add_to_group(pers, accts, group_name, cb)](#module_cox-chapi.Perspective+add_to_group)
+        * [.list([flags], cb)](#module_cox-chapi.Perspective+list)
+        * [.create(perspective, cb)](#module_cox-chapi.Perspective+create)
+        * [.update(perspective, cb)](#module_cox-chapi.Perspective+update)
+        * [.destroy([flags], id, cb)](#module_cox-chapi.Perspective+destroy)
+    * [.Report](#module_cox-chapi.Report)
+        * [new Report([api_key])](#new_module_cox-chapi.Report_new)
+        * [.set_api_key(api_key)](#module_cox-chapi.Report+set_api_key)
+        * [.list([flags], [topic], cb)](#module_cox-chapi.Report+list)
+        * [.get(id, cb)](#module_cox-chapi.Report+get)
+        * [.dimensions([flags], base, cb)](#module_cox-chapi.Report+dimensions)
+        * [.generate(base, x, y, category, [interval], cb)](#module_cox-chapi.Report+generate)
+    * [.Tag](#module_cox-chapi.Tag)
+        * [new Tag([api_key])](#new_module_cox-chapi.Tag_new)
+        * [.set_api_key(api_key)](#module_cox-chapi.Tag+set_api_key)
+        * [.set(aws_id, [asset_id], tags, cb)](#module_cox-chapi.Tag+set)
+        * [.delete(aws_id, [asset_id], tags, cb)](#module_cox-chapi.Tag+delete)
+    * [.utils](#module_cox-chapi.utils) : <code>object</code>
+        * [.execute(component, func, params, [cb])](#module_cox-chapi.utils.execute)
+        * [.find_api_key(cb)](#module_cox-chapi.utils.find_api_key)
+        * [.find_cache(cb)](#module_cox-chapi.utils.find_cache)
+        * ~~[.find_creds(cb)](#module_cox-chapi.utils.find_creds)~~
+        * [.parse_chapi(params)](#module_cox-chapi.utils.parse_chapi) ⇒ <code>Array</code>
+        * [.print_response(err, res)](#module_cox-chapi.utils.print_response)
+        * [.read_stdin(cb)](#module_cox-chapi.utils.read_stdin)
+        * [.run(script)](#module_cox-chapi.utils.run) ⇒ <code>EventEmitter</code>
+        * [.send_request([flags], options, send_data, cb)](#module_cox-chapi.utils.send_request)
+        * [.set_api_key(api_key, [cb])](#module_cox-chapi.utils.set_api_key)
+        * [.set_cache(cache_name, cache, [cb])](#module_cox-chapi.utils.set_cache)
+        * ~~[.set_creds(api_key, [cb])](#module_cox-chapi.utils.set_creds)~~
+    * [.commands](#module_cox-chapi.commands) : <code>object</code>
+        * [.make_api_call(component_name, func_name, params, cb)](#module_cox-chapi.commands.make_api_call)
+        * [.resolve_component(name, [api_key])](#module_cox-chapi.commands.resolve_component) ⇒ <code>object</code>
+        * [.resolve_inputs(args)](#module_cox-chapi.commands.resolve_inputs)
+        * [.resolve_func(component, func_name)](#module_cox-chapi.commands.resolve_func) ⇒ <code>function</code>
+        * [.run_script(name)](#module_cox-chapi.commands.run_script)
+        * [.set_api_key(api_key)](#module_cox-chapi.commands.set_api_key)
+        * [.show_help()](#module_cox-chapi.commands.show_help)
+        * [.show_version()](#module_cox-chapi.commands.show_version)
+        * [.use_api(args)](#module_cox-chapi.commands.use_api)
 
 
 -
 
-<a name="new_module_cloud-health-api.Account_new"></a>
+<a name="module_cox-chapi.Account"></a>
+
+### cox-chapi.Account
+**Kind**: static class of <code>[cox-chapi](#module_cox-chapi)</code>  
+
+* [.Account](#module_cox-chapi.Account)
+    * [new Account([api_key])](#new_module_cox-chapi.Account_new)
+    * [.set_api_key(api_key)](#module_cox-chapi.Account+set_api_key)
+    * [.list([flags], cb)](#module_cox-chapi.Account+list)
+    * [.get(id, cb)](#module_cox-chapi.Account+get)
+    * [.find_by(field, value, [list], cb)](#module_cox-chapi.Account+find_by)
+    * [.create(account, cb)](#module_cox-chapi.Account+create)
+    * [.update(account, cb)](#module_cox-chapi.Account+update)
+    * [.destroy(id, cb)](#module_cox-chapi.Account+destroy)
+
+
+-
+
+<a name="new_module_cox-chapi.Account_new"></a>
 
 #### new Account([api_key])
 
@@ -124,12 +124,12 @@
 
 -
 
-<a name="module_cloud-health-api.Account+set_api_key"></a>
+<a name="module_cox-chapi.Account+set_api_key"></a>
 
 #### account.set_api_key(api_key)
 sets the api key to use when making calls to CloudHealth's API
 
-**Kind**: instance method of <code>[Account](#module_cloud-health-api.Account)</code>  
+**Kind**: instance method of <code>[Account](#module_cox-chapi.Account)</code>  
 
 | Param | Type |
 | --- | --- |
@@ -138,12 +138,12 @@ sets the api key to use when making calls to CloudHealth's API
 
 -
 
-<a name="module_cloud-health-api.Account+list"></a>
+<a name="module_cox-chapi.Account+list"></a>
 
 #### account.list([flags], cb)
 gets a JSON object containing all the accounts
 
-**Kind**: instance method of <code>[Account](#module_cloud-health-api.Account)</code>  
+**Kind**: instance method of <code>[Account](#module_cox-chapi.Account)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -157,12 +157,12 @@ gets a JSON object containing all the accounts
 
 -
 
-<a name="module_cloud-health-api.Account+get"></a>
+<a name="module_cox-chapi.Account+get"></a>
 
 #### account.get(id, cb)
 gets a JSON object containing data for a single account
 
-**Kind**: instance method of <code>[Account](#module_cloud-health-api.Account)</code>  
+**Kind**: instance method of <code>[Account](#module_cox-chapi.Account)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -172,12 +172,12 @@ gets a JSON object containing data for a single account
 
 -
 
-<a name="module_cloud-health-api.Account+find_by"></a>
+<a name="module_cox-chapi.Account+find_by"></a>
 
 #### account.find_by(field, value, [list], cb)
 gets accounts such that field matches the value
 
-**Kind**: instance method of <code>[Account](#module_cloud-health-api.Account)</code>  
+**Kind**: instance method of <code>[Account](#module_cox-chapi.Account)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -189,12 +189,12 @@ gets accounts such that field matches the value
 
 -
 
-<a name="module_cloud-health-api.Account+create"></a>
+<a name="module_cox-chapi.Account+create"></a>
 
 #### account.create(account, cb)
 Creates an account from the json object
 
-**Kind**: instance method of <code>[Account](#module_cloud-health-api.Account)</code>  
+**Kind**: instance method of <code>[Account](#module_cox-chapi.Account)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -204,12 +204,12 @@ Creates an account from the json object
 
 -
 
-<a name="module_cloud-health-api.Account+update"></a>
+<a name="module_cox-chapi.Account+update"></a>
 
 #### account.update(account, cb)
 Updates fields for the account with the specified id to match the given object
 
-**Kind**: instance method of <code>[Account](#module_cloud-health-api.Account)</code>  
+**Kind**: instance method of <code>[Account](#module_cox-chapi.Account)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -220,12 +220,12 @@ Updates fields for the account with the specified id to match the given object
 
 -
 
-<a name="module_cloud-health-api.Account+destroy"></a>
+<a name="module_cox-chapi.Account+destroy"></a>
 
 #### account.destroy(id, cb)
 Deletes the account with the specified id
 
-**Kind**: instance method of <code>[Account](#module_cloud-health-api.Account)</code>  
+**Kind**: instance method of <code>[Account](#module_cox-chapi.Account)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -235,22 +235,22 @@ Deletes the account with the specified id
 
 -
 
-<a name="module_cloud-health-api.Asset"></a>
+<a name="module_cox-chapi.Asset"></a>
 
-### cloud-health-api.Asset
-**Kind**: static class of <code>[cloud-health-api](#module_cloud-health-api)</code>  
+### cox-chapi.Asset
+**Kind**: static class of <code>[cox-chapi](#module_cox-chapi)</code>  
 
-* [.Asset](#module_cloud-health-api.Asset)
-    * [new Asset([api_key])](#new_module_cloud-health-api.Asset_new)
-    * [.set_api_key(api_key)](#module_cloud-health-api.Asset+set_api_key)
-    * [.list_types(cb)](#module_cloud-health-api.Asset+list_types)
-    * [.fields_for(asset_type, cb)](#module_cloud-health-api.Asset+fields_for)
-    * [.query(match, cb)](#module_cloud-health-api.Asset+query)
+* [.Asset](#module_cox-chapi.Asset)
+    * [new Asset([api_key])](#new_module_cox-chapi.Asset_new)
+    * [.set_api_key(api_key)](#module_cox-chapi.Asset+set_api_key)
+    * [.list_types(cb)](#module_cox-chapi.Asset+list_types)
+    * [.fields_for(asset_type, cb)](#module_cox-chapi.Asset+fields_for)
+    * [.query(match, cb)](#module_cox-chapi.Asset+query)
 
 
 -
 
-<a name="new_module_cloud-health-api.Asset_new"></a>
+<a name="new_module_cox-chapi.Asset_new"></a>
 
 #### new Asset([api_key])
 
@@ -261,12 +261,12 @@ Deletes the account with the specified id
 
 -
 
-<a name="module_cloud-health-api.Asset+set_api_key"></a>
+<a name="module_cox-chapi.Asset+set_api_key"></a>
 
 #### asset.set_api_key(api_key)
 sets the api key to use when making calls to CloudHealth's API
 
-**Kind**: instance method of <code>[Asset](#module_cloud-health-api.Asset)</code>  
+**Kind**: instance method of <code>[Asset](#module_cox-chapi.Asset)</code>  
 
 | Param | Type |
 | --- | --- |
@@ -275,12 +275,12 @@ sets the api key to use when making calls to CloudHealth's API
 
 -
 
-<a name="module_cloud-health-api.Asset+list_types"></a>
+<a name="module_cox-chapi.Asset+list_types"></a>
 
 #### asset.list_types(cb)
 gets an array of names of object types that can be searched for
 
-**Kind**: instance method of <code>[Asset](#module_cloud-health-api.Asset)</code>  
+**Kind**: instance method of <code>[Asset](#module_cox-chapi.Asset)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -289,13 +289,13 @@ gets an array of names of object types that can be searched for
 
 -
 
-<a name="module_cloud-health-api.Asset+fields_for"></a>
+<a name="module_cox-chapi.Asset+fields_for"></a>
 
 #### asset.fields_for(asset_type, cb)
 gets an object containing field names, the name of the asset, and an array
  of relation fields
 
-**Kind**: instance method of <code>[Asset](#module_cloud-health-api.Asset)</code>  
+**Kind**: instance method of <code>[Asset](#module_cox-chapi.Asset)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -305,12 +305,12 @@ gets an object containing field names, the name of the asset, and an array
 
 -
 
-<a name="module_cloud-health-api.Asset+query"></a>
+<a name="module_cox-chapi.Asset+query"></a>
 
 #### asset.query(match, cb)
 Queries the list of assets of a given type for those matching specified fields
 
-**Kind**: instance method of <code>[Asset](#module_cloud-health-api.Asset)</code>  
+**Kind**: instance method of <code>[Asset](#module_cox-chapi.Asset)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -321,26 +321,26 @@ Queries the list of assets of a given type for those matching specified fields
 
 -
 
-<a name="module_cloud-health-api.Perspective"></a>
+<a name="module_cox-chapi.Perspective"></a>
 
-### cloud-health-api.Perspective
-**Kind**: static class of <code>[cloud-health-api](#module_cloud-health-api)</code>  
+### cox-chapi.Perspective
+**Kind**: static class of <code>[cox-chapi](#module_cox-chapi)</code>  
 
-* [.Perspective](#module_cloud-health-api.Perspective)
-    * [new Perspective([api_key])](#new_module_cloud-health-api.Perspective_new)
-    * [.set_api_key(api_key)](#module_cloud-health-api.Perspective+set_api_key)
-    * [.get([flags], id, cb)](#module_cloud-health-api.Perspective+get)
-    * [.list_groups(pers, cb)](#module_cloud-health-api.Perspective+list_groups)
-    * [.add_to_group(pers, accts, group_name, cb)](#module_cloud-health-api.Perspective+add_to_group)
-    * [.list([flags], cb)](#module_cloud-health-api.Perspective+list)
-    * [.create(perspective, cb)](#module_cloud-health-api.Perspective+create)
-    * [.update(perspective, cb)](#module_cloud-health-api.Perspective+update)
-    * [.destroy([flags], id, cb)](#module_cloud-health-api.Perspective+destroy)
+* [.Perspective](#module_cox-chapi.Perspective)
+    * [new Perspective([api_key])](#new_module_cox-chapi.Perspective_new)
+    * [.set_api_key(api_key)](#module_cox-chapi.Perspective+set_api_key)
+    * [.get([flags], id, cb)](#module_cox-chapi.Perspective+get)
+    * [.list_groups(pers, cb)](#module_cox-chapi.Perspective+list_groups)
+    * [.add_to_group(pers, accts, group_name, cb)](#module_cox-chapi.Perspective+add_to_group)
+    * [.list([flags], cb)](#module_cox-chapi.Perspective+list)
+    * [.create(perspective, cb)](#module_cox-chapi.Perspective+create)
+    * [.update(perspective, cb)](#module_cox-chapi.Perspective+update)
+    * [.destroy([flags], id, cb)](#module_cox-chapi.Perspective+destroy)
 
 
 -
 
-<a name="new_module_cloud-health-api.Perspective_new"></a>
+<a name="new_module_cox-chapi.Perspective_new"></a>
 
 #### new Perspective([api_key])
 
@@ -351,12 +351,12 @@ Queries the list of assets of a given type for those matching specified fields
 
 -
 
-<a name="module_cloud-health-api.Perspective+set_api_key"></a>
+<a name="module_cox-chapi.Perspective+set_api_key"></a>
 
 #### perspective.set_api_key(api_key)
 sets the api key to use when making calls to CloudHealth's API
 
-**Kind**: instance method of <code>[Perspective](#module_cloud-health-api.Perspective)</code>  
+**Kind**: instance method of <code>[Perspective](#module_cox-chapi.Perspective)</code>  
 
 | Param | Type |
 | --- | --- |
@@ -365,12 +365,12 @@ sets the api key to use when making calls to CloudHealth's API
 
 -
 
-<a name="module_cloud-health-api.Perspective+get"></a>
+<a name="module_cox-chapi.Perspective+get"></a>
 
 #### perspective.get([flags], id, cb)
 gets a JSON object containing data for a perspective
 
-**Kind**: instance method of <code>[Perspective](#module_cloud-health-api.Perspective)</code>  
+**Kind**: instance method of <code>[Perspective](#module_cox-chapi.Perspective)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -382,12 +382,12 @@ gets a JSON object containing data for a perspective
 
 -
 
-<a name="module_cloud-health-api.Perspective+list_groups"></a>
+<a name="module_cox-chapi.Perspective+list_groups"></a>
 
 #### perspective.list_groups(pers, cb)
 gets an array of groups for a perspective
 
-**Kind**: instance method of <code>[Perspective](#module_cloud-health-api.Perspective)</code>  
+**Kind**: instance method of <code>[Perspective](#module_cox-chapi.Perspective)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -397,12 +397,12 @@ gets an array of groups for a perspective
 
 -
 
-<a name="module_cloud-health-api.Perspective+add_to_group"></a>
+<a name="module_cox-chapi.Perspective+add_to_group"></a>
 
 #### perspective.add_to_group(pers, accts, group_name, cb)
 adds an account to a group in a perspective
 
-**Kind**: instance method of <code>[Perspective](#module_cloud-health-api.Perspective)</code>  
+**Kind**: instance method of <code>[Perspective](#module_cox-chapi.Perspective)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -414,12 +414,12 @@ adds an account to a group in a perspective
 
 -
 
-<a name="module_cloud-health-api.Perspective+list"></a>
+<a name="module_cox-chapi.Perspective+list"></a>
 
 #### perspective.list([flags], cb)
 gets a JSON object containing all the perspectives
 
-**Kind**: instance method of <code>[Perspective](#module_cloud-health-api.Perspective)</code>  
+**Kind**: instance method of <code>[Perspective](#module_cox-chapi.Perspective)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -430,12 +430,12 @@ gets a JSON object containing all the perspectives
 
 -
 
-<a name="module_cloud-health-api.Perspective+create"></a>
+<a name="module_cox-chapi.Perspective+create"></a>
 
 #### perspective.create(perspective, cb)
 Creates an perspective from the json object
 
-**Kind**: instance method of <code>[Perspective](#module_cloud-health-api.Perspective)</code>  
+**Kind**: instance method of <code>[Perspective](#module_cox-chapi.Perspective)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -445,12 +445,12 @@ Creates an perspective from the json object
 
 -
 
-<a name="module_cloud-health-api.Perspective+update"></a>
+<a name="module_cox-chapi.Perspective+update"></a>
 
 #### perspective.update(perspective, cb)
 Updates fields for the perspective with the specified id to match the given object
 
-**Kind**: instance method of <code>[Perspective](#module_cloud-health-api.Perspective)</code>  
+**Kind**: instance method of <code>[Perspective](#module_cox-chapi.Perspective)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -461,12 +461,12 @@ Updates fields for the perspective with the specified id to match the given obje
 
 -
 
-<a name="module_cloud-health-api.Perspective+destroy"></a>
+<a name="module_cox-chapi.Perspective+destroy"></a>
 
 #### perspective.destroy([flags], id, cb)
 Deletes the perspective with the specified id
 
-**Kind**: instance method of <code>[Perspective](#module_cloud-health-api.Perspective)</code>  
+**Kind**: instance method of <code>[Perspective](#module_cox-chapi.Perspective)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -479,23 +479,23 @@ Deletes the perspective with the specified id
 
 -
 
-<a name="module_cloud-health-api.Report"></a>
+<a name="module_cox-chapi.Report"></a>
 
-### cloud-health-api.Report
-**Kind**: static class of <code>[cloud-health-api](#module_cloud-health-api)</code>  
+### cox-chapi.Report
+**Kind**: static class of <code>[cox-chapi](#module_cox-chapi)</code>  
 
-* [.Report](#module_cloud-health-api.Report)
-    * [new Report([api_key])](#new_module_cloud-health-api.Report_new)
-    * [.set_api_key(api_key)](#module_cloud-health-api.Report+set_api_key)
-    * [.list([flags], [topic], cb)](#module_cloud-health-api.Report+list)
-    * [.get(id, cb)](#module_cloud-health-api.Report+get)
-    * [.dimensions([flags], base, cb)](#module_cloud-health-api.Report+dimensions)
-    * [.generate(base, x, y, category, [interval], cb)](#module_cloud-health-api.Report+generate)
+* [.Report](#module_cox-chapi.Report)
+    * [new Report([api_key])](#new_module_cox-chapi.Report_new)
+    * [.set_api_key(api_key)](#module_cox-chapi.Report+set_api_key)
+    * [.list([flags], [topic], cb)](#module_cox-chapi.Report+list)
+    * [.get(id, cb)](#module_cox-chapi.Report+get)
+    * [.dimensions([flags], base, cb)](#module_cox-chapi.Report+dimensions)
+    * [.generate(base, x, y, category, [interval], cb)](#module_cox-chapi.Report+generate)
 
 
 -
 
-<a name="new_module_cloud-health-api.Report_new"></a>
+<a name="new_module_cox-chapi.Report_new"></a>
 
 #### new Report([api_key])
 
@@ -506,12 +506,12 @@ Deletes the perspective with the specified id
 
 -
 
-<a name="module_cloud-health-api.Report+set_api_key"></a>
+<a name="module_cox-chapi.Report+set_api_key"></a>
 
 #### report.set_api_key(api_key)
 sets the api key to use when making calls to CloudHealth's API
 
-**Kind**: instance method of <code>[Report](#module_cloud-health-api.Report)</code>  
+**Kind**: instance method of <code>[Report](#module_cox-chapi.Report)</code>  
 
 | Param | Type |
 | --- | --- |
@@ -520,12 +520,12 @@ sets the api key to use when making calls to CloudHealth's API
 
 -
 
-<a name="module_cloud-health-api.Report+list"></a>
+<a name="module_cox-chapi.Report+list"></a>
 
 #### report.list([flags], [topic], cb)
 gets a list of topics (or reports for a topic if a topic id is specified)
 
-**Kind**: instance method of <code>[Report](#module_cloud-health-api.Report)</code>  
+**Kind**: instance method of <code>[Report](#module_cox-chapi.Report)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -538,12 +538,12 @@ gets a list of topics (or reports for a topic if a topic id is specified)
 
 -
 
-<a name="module_cloud-health-api.Report+get"></a>
+<a name="module_cox-chapi.Report+get"></a>
 
 #### report.get(id, cb)
 gets data for the report with the given id
 
-**Kind**: instance method of <code>[Report](#module_cloud-health-api.Report)</code>  
+**Kind**: instance method of <code>[Report](#module_cox-chapi.Report)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -553,12 +553,12 @@ gets data for the report with the given id
 
 -
 
-<a name="module_cloud-health-api.Report+dimensions"></a>
+<a name="module_cox-chapi.Report+dimensions"></a>
 
 #### report.dimensions([flags], base, cb)
 lists the possible dimensions for generating a report under a base
 
-**Kind**: instance method of <code>[Report](#module_cloud-health-api.Report)</code>  
+**Kind**: instance method of <code>[Report](#module_cox-chapi.Report)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -570,12 +570,12 @@ lists the possible dimensions for generating a report under a base
 
 -
 
-<a name="module_cloud-health-api.Report+generate"></a>
+<a name="module_cox-chapi.Report+generate"></a>
 
 #### report.generate(base, x, y, category, [interval], cb)
 returns data for a custom report built from the parameters you specify
 
-**Kind**: instance method of <code>[Report](#module_cloud-health-api.Report)</code>  
+**Kind**: instance method of <code>[Report](#module_cox-chapi.Report)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -589,21 +589,21 @@ returns data for a custom report built from the parameters you specify
 
 -
 
-<a name="module_cloud-health-api.Tag"></a>
+<a name="module_cox-chapi.Tag"></a>
 
-### cloud-health-api.Tag
-**Kind**: static class of <code>[cloud-health-api](#module_cloud-health-api)</code>  
+### cox-chapi.Tag
+**Kind**: static class of <code>[cox-chapi](#module_cox-chapi)</code>  
 
-* [.Tag](#module_cloud-health-api.Tag)
-    * [new Tag([api_key])](#new_module_cloud-health-api.Tag_new)
-    * [.set_api_key(api_key)](#module_cloud-health-api.Tag+set_api_key)
-    * [.set(aws_id, [asset_id], tags, cb)](#module_cloud-health-api.Tag+set)
-    * [.delete(aws_id, [asset_id], tags, cb)](#module_cloud-health-api.Tag+delete)
+* [.Tag](#module_cox-chapi.Tag)
+    * [new Tag([api_key])](#new_module_cox-chapi.Tag_new)
+    * [.set_api_key(api_key)](#module_cox-chapi.Tag+set_api_key)
+    * [.set(aws_id, [asset_id], tags, cb)](#module_cox-chapi.Tag+set)
+    * [.delete(aws_id, [asset_id], tags, cb)](#module_cox-chapi.Tag+delete)
 
 
 -
 
-<a name="new_module_cloud-health-api.Tag_new"></a>
+<a name="new_module_cox-chapi.Tag_new"></a>
 
 #### new Tag([api_key])
 
@@ -614,12 +614,12 @@ returns data for a custom report built from the parameters you specify
 
 -
 
-<a name="module_cloud-health-api.Tag+set_api_key"></a>
+<a name="module_cox-chapi.Tag+set_api_key"></a>
 
 #### tag.set_api_key(api_key)
 sets the api key to use when making calls to CloudHealth's API
 
-**Kind**: instance method of <code>[Tag](#module_cloud-health-api.Tag)</code>  
+**Kind**: instance method of <code>[Tag](#module_cox-chapi.Tag)</code>  
 
 | Param | Type |
 | --- | --- |
@@ -628,12 +628,12 @@ sets the api key to use when making calls to CloudHealth's API
 
 -
 
-<a name="module_cloud-health-api.Tag+set"></a>
+<a name="module_cox-chapi.Tag+set"></a>
 
 #### tag.set(aws_id, [asset_id], tags, cb)
 adds/updates tags for an account or asset
 
-**Kind**: instance method of <code>[Tag](#module_cloud-health-api.Tag)</code>  
+**Kind**: instance method of <code>[Tag](#module_cox-chapi.Tag)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -645,12 +645,12 @@ adds/updates tags for an account or asset
 
 -
 
-<a name="module_cloud-health-api.Tag+delete"></a>
+<a name="module_cox-chapi.Tag+delete"></a>
 
 #### tag.delete(aws_id, [asset_id], tags, cb)
 delete tags from an account or asset
 
-**Kind**: instance method of <code>[Tag](#module_cloud-health-api.Tag)</code>  
+**Kind**: instance method of <code>[Tag](#module_cox-chapi.Tag)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -662,34 +662,34 @@ delete tags from an account or asset
 
 -
 
-<a name="module_cloud-health-api.utils"></a>
+<a name="module_cox-chapi.utils"></a>
 
-### cloud-health-api.utils : <code>object</code>
-**Kind**: static namespace of <code>[cloud-health-api](#module_cloud-health-api)</code>  
+### cox-chapi.utils : <code>object</code>
+**Kind**: static namespace of <code>[cox-chapi](#module_cox-chapi)</code>  
 
-* [.utils](#module_cloud-health-api.utils) : <code>object</code>
-    * [.execute(component, func, params, [cb])](#module_cloud-health-api.utils.execute)
-    * [.find_api_key(cb)](#module_cloud-health-api.utils.find_api_key)
-    * [.find_cache(cb)](#module_cloud-health-api.utils.find_cache)
-    * ~~[.find_creds(cb)](#module_cloud-health-api.utils.find_creds)~~
-    * [.parse_chapi(params)](#module_cloud-health-api.utils.parse_chapi) ⇒ <code>Array</code>
-    * [.print_response(err, res)](#module_cloud-health-api.utils.print_response)
-    * [.read_stdin(cb)](#module_cloud-health-api.utils.read_stdin)
-    * [.run(script)](#module_cloud-health-api.utils.run) ⇒ <code>EventEmitter</code>
-    * [.send_request([flags], options, send_data, cb)](#module_cloud-health-api.utils.send_request)
-    * [.set_api_key(api_key, [cb])](#module_cloud-health-api.utils.set_api_key)
-    * [.set_cache(cache_name, cache, [cb])](#module_cloud-health-api.utils.set_cache)
-    * ~~[.set_creds(api_key, [cb])](#module_cloud-health-api.utils.set_creds)~~
+* [.utils](#module_cox-chapi.utils) : <code>object</code>
+    * [.execute(component, func, params, [cb])](#module_cox-chapi.utils.execute)
+    * [.find_api_key(cb)](#module_cox-chapi.utils.find_api_key)
+    * [.find_cache(cb)](#module_cox-chapi.utils.find_cache)
+    * ~~[.find_creds(cb)](#module_cox-chapi.utils.find_creds)~~
+    * [.parse_chapi(params)](#module_cox-chapi.utils.parse_chapi) ⇒ <code>Array</code>
+    * [.print_response(err, res)](#module_cox-chapi.utils.print_response)
+    * [.read_stdin(cb)](#module_cox-chapi.utils.read_stdin)
+    * [.run(script)](#module_cox-chapi.utils.run) ⇒ <code>EventEmitter</code>
+    * [.send_request([flags], options, send_data, cb)](#module_cox-chapi.utils.send_request)
+    * [.set_api_key(api_key, [cb])](#module_cox-chapi.utils.set_api_key)
+    * [.set_cache(cache_name, cache, [cb])](#module_cox-chapi.utils.set_cache)
+    * ~~[.set_creds(api_key, [cb])](#module_cox-chapi.utils.set_creds)~~
 
 
 -
 
-<a name="module_cloud-health-api.utils.execute"></a>
+<a name="module_cox-chapi.utils.execute"></a>
 
 #### utils.execute(component, func, params, [cb])
 Executes func on component with params as parameters
 
-**Kind**: static method of <code>[utils](#module_cloud-health-api.utils)</code>  
+**Kind**: static method of <code>[utils](#module_cox-chapi.utils)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -701,12 +701,12 @@ Executes func on component with params as parameters
 
 -
 
-<a name="module_cloud-health-api.utils.find_api_key"></a>
+<a name="module_cox-chapi.utils.find_api_key"></a>
 
 #### utils.find_api_key(cb)
 gets the api_key for the current environment
 
-**Kind**: static method of <code>[utils](#module_cloud-health-api.utils)</code>  
+**Kind**: static method of <code>[utils](#module_cox-chapi.utils)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -715,12 +715,12 @@ gets the api_key for the current environment
 
 -
 
-<a name="module_cloud-health-api.utils.find_cache"></a>
+<a name="module_cox-chapi.utils.find_cache"></a>
 
 #### utils.find_cache(cb)
 gets the cache with the given cache_name from the settings file if it exists
 
-**Kind**: static method of <code>[utils](#module_cloud-health-api.utils)</code>  
+**Kind**: static method of <code>[utils](#module_cox-chapi.utils)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -729,14 +729,14 @@ gets the cache with the given cache_name from the settings file if it exists
 
 -
 
-<a name="module_cloud-health-api.utils.find_creds"></a>
+<a name="module_cox-chapi.utils.find_creds"></a>
 
 #### ~~utils.find_creds(cb)~~
 ***Deprecated***
 
 gets the creds object from the settings file if it exists
 
-**Kind**: static method of <code>[utils](#module_cloud-health-api.utils)</code>  
+**Kind**: static method of <code>[utils](#module_cox-chapi.utils)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -745,12 +745,12 @@ gets the creds object from the settings file if it exists
 
 -
 
-<a name="module_cloud-health-api.utils.parse_chapi"></a>
+<a name="module_cox-chapi.utils.parse_chapi"></a>
 
 #### utils.parse_chapi(params) ⇒ <code>Array</code>
 parses an array of key-value pairs (ie. --key=value) into a javscript object
 
-**Kind**: static method of <code>[utils](#module_cloud-health-api.utils)</code>  
+**Kind**: static method of <code>[utils](#module_cox-chapi.utils)</code>  
 **Returns**: <code>Array</code> - an array whose first parameter is an object containing the
                  key-value pairs, and the remaining parameters are any non-key-value
                  pairs in the order that they were given  
@@ -762,13 +762,13 @@ parses an array of key-value pairs (ie. --key=value) into a javscript object
 
 -
 
-<a name="module_cloud-health-api.utils.print_response"></a>
+<a name="module_cox-chapi.utils.print_response"></a>
 
 #### utils.print_response(err, res)
 prints the contents of a json object or an error message. Intended
  as a callback
 
-**Kind**: static method of <code>[utils](#module_cloud-health-api.utils)</code>  
+**Kind**: static method of <code>[utils](#module_cox-chapi.utils)</code>  
 
 | Param | Type |
 | --- | --- |
@@ -778,12 +778,12 @@ prints the contents of a json object or an error message. Intended
 
 -
 
-<a name="module_cloud-health-api.utils.read_stdin"></a>
+<a name="module_cox-chapi.utils.read_stdin"></a>
 
 #### utils.read_stdin(cb)
 Reads from stdin and sends data through callback
 
-**Kind**: static method of <code>[utils](#module_cloud-health-api.utils)</code>  
+**Kind**: static method of <code>[utils](#module_cox-chapi.utils)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -792,12 +792,12 @@ Reads from stdin and sends data through callback
 
 -
 
-<a name="module_cloud-health-api.utils.run"></a>
+<a name="module_cox-chapi.utils.run"></a>
 
 #### utils.run(script) ⇒ <code>EventEmitter</code>
 executes a script in the scripts folder with the given arguments
 
-**Kind**: static method of <code>[utils](#module_cloud-health-api.utils)</code>  
+**Kind**: static method of <code>[utils](#module_cox-chapi.utils)</code>  
 **Returns**: <code>EventEmitter</code> - an EventEmitter for the child process  
 
 | Param | Type | Description |
@@ -807,12 +807,12 @@ executes a script in the scripts folder with the given arguments
 
 -
 
-<a name="module_cloud-health-api.utils.send_request"></a>
+<a name="module_cox-chapi.utils.send_request"></a>
 
 #### utils.send_request([flags], options, send_data, cb)
 function for sending an HTTPS call for CloudHealth's API
 
-**Kind**: static method of <code>[utils](#module_cloud-health-api.utils)</code>  
+**Kind**: static method of <code>[utils](#module_cox-chapi.utils)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -825,12 +825,12 @@ function for sending an HTTPS call for CloudHealth's API
 
 -
 
-<a name="module_cloud-health-api.utils.set_api_key"></a>
+<a name="module_cox-chapi.utils.set_api_key"></a>
 
 #### utils.set_api_key(api_key, [cb])
 sets the api_key for an environment
 
-**Kind**: static method of <code>[utils](#module_cloud-health-api.utils)</code>  
+**Kind**: static method of <code>[utils](#module_cox-chapi.utils)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -840,12 +840,12 @@ sets the api_key for an environment
 
 -
 
-<a name="module_cloud-health-api.utils.set_cache"></a>
+<a name="module_cox-chapi.utils.set_cache"></a>
 
 #### utils.set_cache(cache_name, cache, [cb])
 sets a cache with the given cache_name object by writing to a settings file
 
-**Kind**: static method of <code>[utils](#module_cloud-health-api.utils)</code>  
+**Kind**: static method of <code>[utils](#module_cox-chapi.utils)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -856,14 +856,14 @@ sets a cache with the given cache_name object by writing to a settings file
 
 -
 
-<a name="module_cloud-health-api.utils.set_creds"></a>
+<a name="module_cox-chapi.utils.set_creds"></a>
 
 #### ~~utils.set_creds(api_key, [cb])~~
 ***Deprecated***
 
 sets the credentials object by writing to a settings file
 
-**Kind**: static method of <code>[utils](#module_cloud-health-api.utils)</code>  
+**Kind**: static method of <code>[utils](#module_cox-chapi.utils)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -873,31 +873,31 @@ sets the credentials object by writing to a settings file
 
 -
 
-<a name="module_cloud-health-api.commands"></a>
+<a name="module_cox-chapi.commands"></a>
 
-### cloud-health-api.commands : <code>object</code>
-**Kind**: static namespace of <code>[cloud-health-api](#module_cloud-health-api)</code>  
+### cox-chapi.commands : <code>object</code>
+**Kind**: static namespace of <code>[cox-chapi](#module_cox-chapi)</code>  
 
-* [.commands](#module_cloud-health-api.commands) : <code>object</code>
-    * [.make_api_call(component_name, func_name, params, cb)](#module_cloud-health-api.commands.make_api_call)
-    * [.resolve_component(name, [api_key])](#module_cloud-health-api.commands.resolve_component) ⇒ <code>object</code>
-    * [.resolve_inputs(args)](#module_cloud-health-api.commands.resolve_inputs)
-    * [.resolve_func(component, func_name)](#module_cloud-health-api.commands.resolve_func) ⇒ <code>function</code>
-    * [.run_script(name)](#module_cloud-health-api.commands.run_script)
-    * [.set_api_key(api_key)](#module_cloud-health-api.commands.set_api_key)
-    * [.show_help()](#module_cloud-health-api.commands.show_help)
-    * [.show_version()](#module_cloud-health-api.commands.show_version)
-    * [.use_api(args)](#module_cloud-health-api.commands.use_api)
+* [.commands](#module_cox-chapi.commands) : <code>object</code>
+    * [.make_api_call(component_name, func_name, params, cb)](#module_cox-chapi.commands.make_api_call)
+    * [.resolve_component(name, [api_key])](#module_cox-chapi.commands.resolve_component) ⇒ <code>object</code>
+    * [.resolve_inputs(args)](#module_cox-chapi.commands.resolve_inputs)
+    * [.resolve_func(component, func_name)](#module_cox-chapi.commands.resolve_func) ⇒ <code>function</code>
+    * [.run_script(name)](#module_cox-chapi.commands.run_script)
+    * [.set_api_key(api_key)](#module_cox-chapi.commands.set_api_key)
+    * [.show_help()](#module_cox-chapi.commands.show_help)
+    * [.show_version()](#module_cox-chapi.commands.show_version)
+    * [.use_api(args)](#module_cox-chapi.commands.use_api)
 
 
 -
 
-<a name="module_cloud-health-api.commands.make_api_call"></a>
+<a name="module_cox-chapi.commands.make_api_call"></a>
 
 #### commands.make_api_call(component_name, func_name, params, cb)
 makes an api call by calling <component_name>#<func_name> with params
 
-**Kind**: static method of <code>[commands](#module_cloud-health-api.commands)</code>  
+**Kind**: static method of <code>[commands](#module_cox-chapi.commands)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -909,12 +909,12 @@ makes an api call by calling <component_name>#<func_name> with params
 
 -
 
-<a name="module_cloud-health-api.commands.resolve_component"></a>
+<a name="module_cox-chapi.commands.resolve_component"></a>
 
 #### commands.resolve_component(name, [api_key]) ⇒ <code>object</code>
 resolves a name of a component and retrieves the actual component
 
-**Kind**: static method of <code>[commands](#module_cloud-health-api.commands)</code>  
+**Kind**: static method of <code>[commands](#module_cox-chapi.commands)</code>  
 **Returns**: <code>object</code> - the component object  
 
 | Param | Type | Description |
@@ -925,12 +925,12 @@ resolves a name of a component and retrieves the actual component
 
 -
 
-<a name="module_cloud-health-api.commands.resolve_inputs"></a>
+<a name="module_cox-chapi.commands.resolve_inputs"></a>
 
 #### commands.resolve_inputs(args)
 calls the appropriate command based on the given arguments
 
-**Kind**: static method of <code>[commands](#module_cloud-health-api.commands)</code>  
+**Kind**: static method of <code>[commands](#module_cox-chapi.commands)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -939,12 +939,12 @@ calls the appropriate command based on the given arguments
 
 -
 
-<a name="module_cloud-health-api.commands.resolve_func"></a>
+<a name="module_cox-chapi.commands.resolve_func"></a>
 
 #### commands.resolve_func(component, func_name) ⇒ <code>function</code>
 retrieves the function with the given name for the given component
 
-**Kind**: static method of <code>[commands](#module_cloud-health-api.commands)</code>  
+**Kind**: static method of <code>[commands](#module_cox-chapi.commands)</code>  
 **Returns**: <code>function</code> - the function  
 
 | Param | Type | Description |
@@ -955,12 +955,12 @@ retrieves the function with the given name for the given component
 
 -
 
-<a name="module_cloud-health-api.commands.run_script"></a>
+<a name="module_cox-chapi.commands.run_script"></a>
 
 #### commands.run_script(name)
 executes a script in the scripts folder with the given arguments
 
-**Kind**: static method of <code>[commands](#module_cloud-health-api.commands)</code>  
+**Kind**: static method of <code>[commands](#module_cox-chapi.commands)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -969,12 +969,12 @@ executes a script in the scripts folder with the given arguments
 
 -
 
-<a name="module_cloud-health-api.commands.set_api_key"></a>
+<a name="module_cox-chapi.commands.set_api_key"></a>
 
 #### commands.set_api_key(api_key)
 sets the api key and prints a message on success
 
-**Kind**: static method of <code>[commands](#module_cloud-health-api.commands)</code>  
+**Kind**: static method of <code>[commands](#module_cox-chapi.commands)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -983,31 +983,31 @@ sets the api key and prints a message on success
 
 -
 
-<a name="module_cloud-health-api.commands.show_help"></a>
+<a name="module_cox-chapi.commands.show_help"></a>
 
 #### commands.show_help()
 prints a message explaining the usage of the tool
 
-**Kind**: static method of <code>[commands](#module_cloud-health-api.commands)</code>  
+**Kind**: static method of <code>[commands](#module_cox-chapi.commands)</code>  
 
 -
 
-<a name="module_cloud-health-api.commands.show_version"></a>
+<a name="module_cox-chapi.commands.show_version"></a>
 
 #### commands.show_version()
 prints the name and version number of this tool
 
-**Kind**: static method of <code>[commands](#module_cloud-health-api.commands)</code>  
+**Kind**: static method of <code>[commands](#module_cox-chapi.commands)</code>  
 
 -
 
-<a name="module_cloud-health-api.commands.use_api"></a>
+<a name="module_cox-chapi.commands.use_api"></a>
 
 #### commands.use_api(args)
 reads parameters from stdin (if any), adds them to the list of params, and
  makes an api call based on the given args
 
-**Kind**: static method of <code>[commands](#module_cloud-health-api.commands)</code>  
+**Kind**: static method of <code>[commands](#module_cox-chapi.commands)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |

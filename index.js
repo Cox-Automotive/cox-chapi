@@ -12,7 +12,7 @@ var Report = require('./components/report');
 var utils = require('./utils/chapi');
 
 /**
- *  @module cloud-health-api
+ *  @module cox-chapi
  */
 var CloudHealth = {
   Account,

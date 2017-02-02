@@ -1,5 +1,5 @@
 {
-  "name": "cloud-health-api",
+  "name": "cox-chapi",
   "version": "1.0.0",
   "description": "A node module that encapsulates API calls for cloudhealth",
   "main": "index.js",
@@ -18,11 +18,14 @@
   },
   "keywords": [
     "cloud",
+    "cloudhealth",
     "health",
-    "api"
+    "api",
+    "rest",
+    "cli"
   ],
-  "author": "Ben Watson (ben.watson@coxautoinc.com)",
-  "license": "ISC",
+  "author": "Ben Watson (ben.watson.developer@gmail.com)",
+  "license": "MIT",
   "bin": {
     "chapi": "./bin/chapi.js"
   }

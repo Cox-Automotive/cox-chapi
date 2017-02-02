@@ -10,7 +10,7 @@ var utils = require('../utils/chapi');
 
 /**
  *  @class Account
- *  @memberof module:cloud-health-api
+ *  @memberof module:cox-chapi
  *  @param {string} [api_key]
  */
 var Account = function(api_key) {
@@ -32,7 +32,7 @@ Account.prototype._options = function(method, path, params) {
 
 /**
  *  sets the api key to use when making calls to CloudHealth's API
- *  @function module:cloud-health-api.Account#set_api_key
+ *  @function module:cox-chapi.Account#set_api_key
  *  @param {string} api_key
  */
 Account.prototype.set_api_key = function(api_key) {
@@ -41,7 +41,7 @@ Account.prototype.set_api_key = function(api_key) {
 
 /**
  *  gets a JSON object containing all the accounts
- *  @function module:cloud-health-api.Account#list
+ *  @function module:cox-chapi.Account#list
  *  @param {object} [flags] - an object specifying the following options
  *  @param {number} [flags.page] - the page number of the page to get
  *  @param {number} [flags.page_count] - the number of accounts to list per page
@@ -109,7 +109,7 @@ Account.prototype._list_cb = function(flags, cb, err, result) {
 /**
  *  gets a list of all accounts rather than paginating and returning a single page
  *  @private
- *  @function module:cloud-health-api.Account#_list_all
+ *  @function module:cox-chapi.Account#_list_all
  *  @param {arrayCallback} cb - called with an array of accounts
  */
 Account.prototype._list_all = function(cb) {
@@ -129,7 +129,7 @@ Account.prototype._list_all = function(cb) {
 
 /**
  *  gets a JSON object containing data for a single account
- *  @function module:cloud-health-api.Account#get
+ *  @function module:cox-chapi.Account#get
  *  @param {number} id - the id of the account
  *  @param {objectCallback} cb - called with the account
  */
@@ -141,7 +141,7 @@ Account.prototype.get = function(id, cb) {
 
 /**
  *  gets accounts such that field matches the value
- *  @function module:cloud-health-api.Account#find_by
+ *  @function module:cox-chapi.Account#find_by
  *  @param {string} field - the name of the field to search by
  *  @param {string} value - the value to match
  *  @param {Array} [list] - an optional array of accounts to search (if given,
@@ -180,7 +180,7 @@ Account.prototype._find_by = function(field, value, list, cb) {
 
 /**
  *  Creates an account from the json object
- *  @function module:cloud-health-api.Account#create
+ *  @function module:cox-chapi.Account#create
  *  @param {object} account - an object specifying fields for the new account
  *  @param {objectCallback} cb - called with the new account
  */
@@ -192,7 +192,7 @@ Account.prototype.create = function(account, cb) {
 
 /**
  *  Updates fields for the account with the specified id to match the given object
- *  @function module:cloud-health-api.Account#update
+ *  @function module:cox-chapi.Account#update
  *  @param {object} account - an object specifying fields with updated values
  *  @param {number} account.id - the id of the account
  *  @param {objectCallback} cb - called with the updated account
@@ -207,7 +207,7 @@ Account.prototype.update = function(account, cb) {
 
 /**
  *  Deletes the account with the specified id
- *  @function module:cloud-health-api.Account#destroy
+ *  @function module:cox-chapi.Account#destroy
  *  @param {number} id - the id of the account
  *  @param {stringCallback} cb - called with a success message
  */

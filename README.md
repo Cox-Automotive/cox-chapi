@@ -1,24 +1,22 @@
-# cloud-health-api
+# chapi
 
-Note: This node module is developed entirely separate from the CloudHealth application. This module is not guaranteed to always function properly with CloudHealth's API due to the potential of it changing and the fact that this module is not maintained by the same developers that developed the CloudHealth application or API
+Note: This node module is developed entirely separate from the CloudHealth application. This module is not guaranteed to always function properly with CloudHealth's API due to the potential of their API changing and the fact that this module is not maintained by the same developers that developed the CloudHealth application or API. However, we are in contact with CloudHealth and will update this tool to cover changes to their API.
 
 ## Installation
 
 This package can be installed as a command-line util by running
 
 ```bash
-git clone <the-name-of-this-repo>
-npm install -g cloud-health-api/
+npm install -g cox-chapi
 ```
 
 or as a module to be used in a node.js project
 
 ```bash
-git clone <the-name-of-this-repo>
-npm install cloud-health-api/
+npm install cox-chapi --save
 ```
 
-which can then be used in a Node.js script by requiring `cloud-health-api`
+which can then be used in a Node.js script by requiring `cox-chapi`
 
 ## Usage
 
@@ -27,7 +25,7 @@ The main export of this module is the CloudHealth namespace. It contains classes
 To use the module in Node.js, first require the module:
 
 ```javascript
-var CloudHealth = require('cloud-health-api');
+var CloudHealth = require('cox-chapi');
 ```
 
 Then instantiate an object from the class of whichever CloudHealth API you want to use:
@@ -39,7 +37,7 @@ var account = new CloudHealth.Account('<your-cloudhealth-api-key>');
 Now you can begin calling the object's methods. Each method takes a requestCallback that will be given two items: an error and the return data. If the call succeeds, the error will be null and the data field will contain your data, otherwise the error will be an error object and the data field may contain information useful for debugging. For example, the following script will get and print an account with the id '1234567890' on success, or throw an error on failure:
 
 ```javascript
-var CloudHealth = require('cloud-health-api');
+var CloudHealth = require('cox-chapi');
 var account = new CloudHealth.Account('sdafa-asdf-dsfasdf-asdf');
 
 account.get(1234567890, function(err, data) {
@@ -61,7 +59,7 @@ This module can also be used from the command-line. To see how to use this modul
 Some of the functions used by this module can be found in the utils/chapi.js file. In Node.js, these functions can be accessed through
 
 ```javascript
-var CloudHealth = require('cloud-health-api');
+var CloudHealth = require('cox-chapi');
 var utils = CloudHealth.utils;
 ```
 
@@ -71,7 +69,7 @@ Examples can be found in the examples folder under the folder for their componen
 
 ## Documentation
 
-HTML pages containing documentation for all components of this module can be found in `/doc/cloud-health-api/1.0.0` or the same information can be found in a markdown file at `doc/Doc.md`. Note: To view the html pages, download them and open them with your browser
+HTML pages containing documentation for all components of this module can be found in `/doc/cox-chapi/1.0.0` or the same information can be found in a markdown file at `doc/Doc.md`. Note: To view the html pages, download them and open them with your browser
 
 ## Command Line
 

@@ -10,7 +10,7 @@ var utils = require('../utils/chapi');
 
 /**
  *  @class Asset
- *  @memberof module:cloud-health-api
+ *  @memberof module:cox-chapi
  *  @param {string} [api_key]
  */
 var Asset = function(api_key) {
@@ -19,7 +19,7 @@ var Asset = function(api_key) {
 
 /**
  *  sets the api key to use when making calls to CloudHealth's API
- *  @function module:cloud-health-api.Asset#set_api_key
+ *  @function module:cox-chapi.Asset#set_api_key
  *  @param {string} api_key
  */
 Asset.prototype.set_api_key = function(api_key) {
@@ -41,7 +41,7 @@ Asset.prototype._options = function(method, path, params) {
 
 /**
  *  gets an array of names of object types that can be searched for
- *  @function module:cloud-health-api.Asset#list_types
+ *  @function module:cox-chapi.Asset#list_types
  *  @param {arrayCallback} cb - called with an array of types (as strings)
  */
 Asset.prototype.list_types = function(cb) {
@@ -62,7 +62,7 @@ Asset.prototype._list_types_cb = function(cb, err, result) {
 /**
  *  gets an object containing field names, the name of the asset, and an array
  *  of relation fields
- *  @function module:cloud-health-api.Asset#fields_for
+ *  @function module:cox-chapi.Asset#fields_for
  *  @param {string} asset_type - the asset type to list fields for
  *  @param {arrayCallback} cb - called with an array of objects detailing the fields
  */
@@ -83,7 +83,7 @@ Asset.prototype._fields_for_cb = function(asset_type, cb, err, result) {
 
 /**
  *  Queries the list of assets of a given type for those matching specified fields
- *  @function module:cloud-health-api.Asset#query
+ *  @function module:cox-chapi.Asset#query
  *  @param {object} match - an object where the keys are field names and the
  *    values are the values to match for that field (leave null to get all
  *    assets of the given type)
@@ -115,7 +115,7 @@ Asset.prototype._query_cb = function(match, cb, err, result) {
 /**
  *  encodes an object into CloudHealth Query Language
  *  @private
- *  @function module:cloud-health-api.Asset#_encodeCHQL
+ *  @function module:cox-chapi.Asset#_encodeCHQL
  *  @param {object} obj - the object to encode
  *  @return {string} the encoded string or null upon failure
  */

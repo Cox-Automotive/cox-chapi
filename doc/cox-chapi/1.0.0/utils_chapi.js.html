@@ -28,7 +28,7 @@
         <article>
             <pre class="prettyprint source linenums"><code>/**
  *  @overview this library provides several shared functions that are used
- *            throughout the cloud-health-api module
+ *            throughout the cox-chapi module
  *  @author Ben Watson &lt;ben.watson@coxautoinc.com>
  */
 
@@ -37,7 +37,7 @@ var https = require('https');
 var child_process = require('child_process');
 
 /**
- *  @namespace module:cloud-health-api.utils
+ *  @namespace module:cox-chapi.utils
  */
 var utils = {
   _get_settings,
@@ -61,7 +61,7 @@ var utils = {
 
 /**
  *  gets the settings object by reading from a settings file
- *  @memberof module:cloud-health-api.utils
+ *  @memberof module:cox-chapi.utils
  *  @private
  *  @param {objectCallback} cb - called with the settings object
  */
@@ -124,7 +124,7 @@ function _options(base, method, path, params, api_key) {
 /**
  *  parses a string of data as parameters given to the chapi command-line utility
  *  @private
- *  @memberof module:cloud-health-api.utils
+ *  @memberof module:cox-chapi.utils
  *  @param {string} data - the string containing parameter data
  *  @return {string[]} an array of parameters
  */
@@ -151,7 +151,7 @@ function _parse_stdin_data(data) {
 
 /**
  *  sets the settings object by writing to a settings file
- *  @memberof module:cloud-health-api.utils
+ *  @memberof module:cox-chapi.utils
  *  @private
  *  @param {object} settings - the new settings object
  *  @param {objectCallback} [cb] - called with the new settings object
@@ -182,7 +182,7 @@ function _set_settings(settings, cb) {
 
 /**
  *  Executes func on component with params as parameters
- *  @memberof module:cloud-health-api.utils
+ *  @memberof module:cox-chapi.utils
  *  @param {object} component
  *  @param {function} func
  *  @param {string[]} params
@@ -208,7 +208,7 @@ function execute(component, func, params, cb) {
 
 /**
  *  gets the api_key for the current environment
- *  @memberof module:cloud-health-api.utils
+ *  @memberof module:cox-chapi.utils
  *  @param {objectCallback} cb - called with the api_key
  */
 function find_api_key(cb) {
@@ -231,7 +231,7 @@ function find_api_key(cb) {
 
 /**
  *  gets the cache with the given cache_name from the settings file if it exists
- *  @memberof module:cloud-health-api.utils
+ *  @memberof module:cox-chapi.utils
  *  @param {mixedCallback} cb - called with the cache value
  */
 function find_cache(cache_name, cb) {
@@ -244,7 +244,7 @@ function find_cache(cache_name, cb) {
 /**
  *  gets the creds object from the settings file if it exists
  *  @deprecated use find_api_key instead
- *  @memberof module:cloud-health-api.utils
+ *  @memberof module:cox-chapi.utils
  *  @param {objectCallback} cb - called with the credentials object
  */
 function find_creds(cb) {
@@ -274,7 +274,7 @@ function get_package_json(cb) {
 
 /**
  *  parses an array of key-value pairs (ie. --key=value) into a javscript object
- *  @memberof module:cloud-health-api.utils
+ *  @memberof module:cox-chapi.utils
  *  @param {string[]} params - an array of chapi strings of the form "--key=value"
  *  @return {Array} an array whose first parameter is an object containing the
  *                  key-value pairs, and the remaining parameters are any non-key-value
@@ -318,7 +318,7 @@ function parse_chapi(params) {
 /**
  *  prints the contents of a json object or an error message. Intended
  *  as a callback
- *  @memberof module:cloud-health-api.utils
+ *  @memberof module:cox-chapi.utils
  *  @param {object} err
  *  @param {mixed} res
  */
@@ -326,7 +326,10 @@ function print_response(err, res) {
   if (err) {
     if (res) console.error(res);
     if (process.env['CHAPI_DEV_MODE']) throw err;
-    else console.error(err.message);
+    else {
+      console.error(err.message);
+      process.exit(1);
+    }
   }
   else {
     console.log(JSON.stringify(res));
@@ -335,7 +338,7 @@ function print_response(err, res) {
 
 /**
  *  Reads from stdin and sends data through callback
- *  @memberof module:cloud-health-api.utils
+ *  @memberof module:cox-chapi.utils
  *  @param {stringCallback} cb - called with the data that was read in
  */
 function read_stdin(cb) {
@@ -357,7 +360,7 @@ function read_stdin(cb) {
 
 /**
  *  executes a script in the scripts folder with the given arguments
- *  @memberof module:cloud-health-api.utils
+ *  @memberof module:cox-chapi.utils
  *  @param {string} script - the name of the script to run (without .js)
  *  @return {EventEmitter} an EventEmitter for the child process
  */
@@ -394,7 +397,7 @@ function run(script, ...args) {
 
 /**
  *  function for sending an HTTPS call for CloudHealth's API
- *  @memberof module:cloud-health-api.utils
+ *  @memberof module:cox-chapi.utils
  *  @param {object} [flags] - an optional flags object
  *  @param {boolean} [flags.headers] - if true, yield only the headers returned
  *  @param {object} options - options to use for the https.request function
@@ -454,7 +457,7 @@ function send_request(flags, options, send_data, cb) {
 
 /**
  *  sets the api_key for an environment
- *  @memberof module:cloud-health-api.utils
+ *  @memberof module:cox-chapi.utils
  *  @param {string} api_key - the api_key to use for CloudHealth
  *  @param {objectCallback} [cb] - called with the api_key
  */
@@ -471,7 +474,7 @@ function set_api_key(api_key, cb) {
 
 /**
  *  sets a cache with the given cache_name object by writing to a settings file
- *  @memberof module:cloud-health-api.utils
+ *  @memberof module:cox-chapi.utils
  *  @param {string} cache_name - the name of the cache variable to set
  *  @param {mixed} cache - the new cache variable
  *  @param {mixedCallback} [cb] - called with the new cache variable
@@ -497,7 +500,7 @@ function set_cache(cache_name, cache, cb) {
 
 /**
  *  sets the credentials object by writing to a settings file
- *  @memberof module:cloud-health-api.utils
+ *  @memberof module:cox-chapi.utils
  *  @deprecated use set_api_key instead
  *  @param {string} api_key - the api_key to use for CloudHealth
  *  @param {objectCallback} [cb] - called with the credentials object
@@ -534,13 +537,13 @@ module.exports = utils;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-cloud-health-api.html">cloud-health-api</a></li></ul><h3>Classes</h3><ul><li><a href="module-cloud-health-api.Account.html">Account</a></li><li><a href="module-cloud-health-api.Asset.html">Asset</a></li><li><a href="module-cloud-health-api.Perspective.html">Perspective</a></li><li><a href="module-cloud-health-api.Report.html">Report</a></li><li><a href="module-cloud-health-api.Tag.html">Tag</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-cloud-health-api.commands.html">commands</a></li><li><a href="module-cloud-health-api.utils.html">utils</a></li></ul><h3>Global</h3><ul><li><a href="global.html#get_package_json">get_package_json</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-cox-chapi.html">cox-chapi</a></li></ul><h3>Classes</h3><ul><li><a href="module-cox-chapi.Account.html">Account</a></li><li><a href="module-cox-chapi.Asset.html">Asset</a></li><li><a href="module-cox-chapi.Perspective.html">Perspective</a></li><li><a href="module-cox-chapi.Report.html">Report</a></li><li><a href="module-cox-chapi.Tag.html">Tag</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-cox-chapi.commands.html">commands</a></li><li><a href="module-cox-chapi.utils.html">utils</a></li></ul><h3>Global</h3><ul><li><a href="global.html#get_package_json">get_package_json</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Tue Dec 13 2016 18:55:04 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Thu Feb 02 2017 17:58:50 GMT-0500 (EST)
 </footer>
 
 <script> prettyPrint(); </script>

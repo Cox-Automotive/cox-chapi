@@ -9,7 +9,7 @@ var utils = require('../utils/chapi.js');
 
 /**
  *  @class Perspective
- *  @memberof module:cloud-health-api
+ *  @memberof module:cox-chapi
  *  @param {string} [api_key]
  */
 var Perspective = function(api_key) {
@@ -18,7 +18,7 @@ var Perspective = function(api_key) {
 
 /**
  *  sets the api key to use when making calls to CloudHealth's API
- *  @function module:cloud-health-api.Perspective#set_api_key
+ *  @function module:cox-chapi.Perspective#set_api_key
  *  @param {string} api_key
  */
 Perspective.prototype.set_api_key = function(api_key) {
@@ -40,7 +40,7 @@ Perspective.prototype._options = function(method, path, params) {
 
 /**
  *  gets a JSON object containing data for a perspective
- *  @function module:cloud-health-api.Perspective#get
+ *  @function module:cox-chapi.Perspective#get
  *  @param {object} [flags] - an optional flags object
  *  @param {boolean} [flags.cache] - if true, this method will re-use a stored list
  *                                   of perspectives from the last time the --cache
@@ -93,7 +93,7 @@ Perspective.prototype._get_cb = function(flags, id, cb, err, result) {
 
 /**
  *  gets the id of the perspective with the given name
- *  @function module:cloud-health-api.Perspective#_lookup_id
+ *  @function module:cox-chapi.Perspective#_lookup_id
  *  @private
  *  @param {object} flags - a flags object
  *  @param {boolean} [flags.cache] - if true, this method will re-use a stored list
@@ -114,7 +114,7 @@ Perspective.prototype._lookup_id = function(flags, name, cb) {
 
 /**
  *  gets an id for a group
- *  @function module:cloud-health-api.Perspective#_lookup_group_id
+ *  @function module:cox-chapi.Perspective#_lookup_group_id
  *  @private
  *  @param {object} pers - an object representing a perspective
  *  @param {string} group_name - the name of the group to search for
@@ -141,7 +141,7 @@ Perspective.prototype._lookup_group_id = function(pers, group_name, cb) {
 
 /**
  *  gets an array of groups for a perspective
- *  @function module:cloud-health-api.Perspective#list_groups
+ *  @function module:cox-chapi.Perspective#list_groups
  *  @param {object|string} pers - an object representing a perspective, or
  *                                the perspective's id
  *  @param {arrayCallback} cb - an array of groups for the perspective
@@ -166,7 +166,7 @@ Perspective.prototype.list_groups = function(pers, cb) {
 
 /**
  *  adds an account to a group in a perspective
- *  @function module:cloud-health-api.Perspective#add_to_group
+ *  @function module:cox-chapi.Perspective#add_to_group
  *  @param {object|string} pers - an object representing the perspective, or
  *                                the perspective's id
  *  @param {mixed} accts - the account to add to a group, the account's id, or
@@ -220,7 +220,7 @@ Perspective.prototype.add_to_group = function(pers, accts, group_name, cb) {
 
 /**
  *  Gets the rule in pers that specifies membership to the group with group_id
- *  @function module:cloud-health-api.Perspective#_get_rule
+ *  @function module:cox-chapi.Perspective#_get_rule
  *  @private
  *  @param {object} pers - a perspective containing rules
  *  @param {string} group_id - the id of the group that the rule points to
@@ -251,7 +251,7 @@ Perspective.prototype._get_rule = function(pers, group_id) {
 
 /**
  *  gets a JSON object containing all the perspectives
- *  @function module:cloud-health-api.Perspective#list
+ *  @function module:cox-chapi.Perspective#list
  *  @param {object} [flags] - an optional flags object
  *  @param {boolean} [flags.cache] - if true, this method will re-use a stored list
  *                                   of perspectives from the last time the --cache
@@ -302,7 +302,7 @@ Perspective.prototype._list_cb = function(flags, cb, err, result) {
 
 /**
  *  Creates an perspective from the json object
- *  @function module:cloud-health-api.Perspective#create
+ *  @function module:cox-chapi.Perspective#create
  *  @param {object} perspective - an object specifying fields for the new perspective
  *  @param {objectCallback} cb - called with the new perspective
  */
@@ -318,7 +318,7 @@ Perspective.prototype.create = function(perspective, cb) {
 
 /**
  *  Updates fields for the perspective with the specified id to match the given object
- *  @function module:cloud-health-api.Perspective#update
+ *  @function module:cox-chapi.Perspective#update
  *  @param {object} perspective - an object holding new data to update the perspective with
  *  @param {number} perspective.id - the id of the perspective
  *  @param {objectCallback} cb - called with the updated perspective
@@ -335,7 +335,7 @@ Perspective.prototype.update = function(perspective, cb) {
 
 /**
  *  Deletes the perspective with the specified id
- *  @function module:cloud-health-api.Perspective#destroy
+ *  @function module:cox-chapi.Perspective#destroy
  *  @param {object} [flags] - leave null/undefined if not specifying options
  *  @param {boolean} [flags.force] - if true, delete regardless of dependencies
  *  @param {boolean} [flags.hard_delete] - if true, skips archiving the perspective before deletion
