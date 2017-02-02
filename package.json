@@ -1,0 +1,29 @@
+{
+  "name": "cloud-health-api",
+  "version": "1.0.0",
+  "description": "A node module that encapsulates API calls for cloudhealth",
+  "main": "index.js",
+  "dependencies": {
+    "async": "^2.0.1",
+    "querystring": "^0.2.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "proxyquire": "^1.7.10",
+    "sinon": "^1.17.6"
+  },
+  "scripts": {
+    "test": "istanbul cover _mocha -- -R spec --recursive",
+    "jsdoc": "rm -r ./doc 2> /dev/null; jsdoc -c ./jsdoc.json -r -P ./package.json -R ./README.md -d doc .; jsdoc2md --src index.js --src ./components/**/*.js --src ./utils/**/*.js --separators > ./doc/DOC.md"
+  },
+  "keywords": [
+    "cloud",
+    "health",
+    "api"
+  ],
+  "author": "Ben Watson (ben.watson@coxautoinc.com)",
+  "license": "ISC",
+  "bin": {
+    "chapi": "./bin/chapi.js"
+  }
+}

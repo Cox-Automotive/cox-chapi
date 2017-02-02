@@ -1,0 +1,4 @@
+node_modules/
+jsdoc.json
+coverage/
+*.DS_Store

@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3>cloud-health-api 1.0.0</h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>cloud-health-api</h1><p>Note: This node module is developed entirely separate from the CloudHealth application. This module is not guaranteed to always function properly with CloudHealth's API due to the potential of it changing and the fact that this module is not maintained by the same developers that developed the CloudHealth application or API</p>
+<h2>Installation</h2><p>This package can be installed as a command-line util by running</p>
+<pre class="prettyprint source lang-bash"><code>git clone &lt;the-name-of-this-repo>
+npm install -g cloud-health-api/</code></pre><p>or as a module to be used in a node.js project</p>
+<pre class="prettyprint source lang-bash"><code>git clone &lt;the-name-of-this-repo>
+npm install cloud-health-api/</code></pre><p>which can then be used in a Node.js script by requiring <code>cloud-health-api</code></p>
+<h2>Usage</h2><p>The main export of this module is the CloudHealth namespace. It contains classes such as Account, Asset, and Perspective from which objects can be instantiated that contain functions to make API calls to CloudHealth. Instantiating each class takes one argument: your CloudHealth api key. This key can be reset by calling the object's set_api_key method with your api key as the first argument. A valid api key is required for any of the object's methods to work.</p>
+<p>To use the module in Node.js, first require the module:</p>
+<pre class="prettyprint source lang-javascript"><code>var CloudHealth = require('cloud-health-api');</code></pre><p>Then instantiate an object from the class of whichever CloudHealth API you want to use:</p>
+<pre class="prettyprint source lang-javascript"><code>var account = new CloudHealth.Account('&lt;your-cloudhealth-api-key>');</code></pre><p>Now you can begin calling the object's methods. Each method takes a requestCallback that will be given two items: an error and the return data. If the call succeeds, the error will be null and the data field will contain your data, otherwise the error will be an error object and the data field may contain information useful for debugging. For example, the following script will get and print an account with the id '1234567890' on success, or throw an error on failure:</p>
+<pre class="prettyprint source lang-javascript"><code>var CloudHealth = require('cloud-health-api');
+var account = new CloudHealth.Account('sdafa-asdf-dsfasdf-asdf');
+
+account.get(1234567890, function(err, data) {
+  if (err) {
+    throw err;
+  }
+  else {
+    console.log(JSON.stringify(data));
+  }
+});</code></pre><p>For further documentation of methods, see <a href="./doc/DOC.md">Documentation</a></p>
+<p>This module can also be used from the command-line. To see how to use this module from the command-line see <a href="#command-line">Command Line</a></p>
+<h4>Extra Utilities</h4><p>Some of the functions used by this module can be found in the utils/chapi.js file. In Node.js, these functions can be accessed through</p>
+<pre class="prettyprint source lang-javascript"><code>var CloudHealth = require('cloud-health-api');
+var utils = CloudHealth.utils;</code></pre><h2>Examples</h2><p>Examples can be found in the examples folder under the folder for their component name (ie. Account examples are in examples/account). The examples assume the existence of the file examples/config.js which contains a JSON object like <code>{&quot;api_key&quot;: &quot;&lt;your-api-key&gt;&quot;}</code>. Create this file with your api key if you wish to see the examples work. You may also need to change some of the dummy data used in the examples in order for them to grab actual data</p>
+<h2>Documentation</h2><p>HTML pages containing documentation for all components of this module can be found in <code>/doc/cloud-health-api/1.0.0</code> or the same information can be found in a markdown file at <code>doc/Doc.md</code>. Note: To view the html pages, download them and open them with your browser</p>
+<h2>Command Line</h2><h4>Setup</h4><p>On top of being an npm module that can be used with other node.js code, this module creates a command-line utility called <code>chapi</code>. To get this command line utility, run <code>npm install -g &lt;the-name-of-this-repo&gt;</code>.</p>
+<p>The utility works by first setting up your API key by getting an API key from CloudHealth and calling</p>
+<pre class="prettyprint source lang-bash"><code>chapi set_api_key &lt;your-cloudhealth-api-key></code></pre><p>This only needs to be done once. This command will create a json object named .cloudhealthapi.json in your home directory containing your API key for use in future calls to the chapi command-line tool.</p>
+<h4>Usage</h4><p>The chapi command can be used as follows:</p>
+<pre class="prettyprint source lang-bash"><code>chapi &lt;component-name> &lt;function-name> [&lt;flags>] [&lt;parameters>]</code></pre><p>Excluding &quot;set_api_key&quot; which only takes a String, all of the functions in this module that can be called from the command line can take an optional flags object and at most one parameter followed by a callback. The chapi command line utility takes care of the callback for you, printing either an error or the JSON result of whichever function you specified.</p>
+<p>Some functions can take a flags object as first parameter, which can be specified as key-value pairs in the form <code>--key=&quot;value&quot;</code>. The quotes are optional unless the value contains spaces. For example:</p>
+<pre class="prettyprint source lang-bash"><code>chapi account list --all=&quot;true&quot;</code></pre><p>Note: flags with a value of true can be specified without a value and run just the same (ie. --all=&quot;true&quot; is equivalent to --all)</p>
+<p>Furthermore, some functions can take a flags object as well as another parameter, and in those cases both flags and parameters can be specified in the same command, like this:</p>
+<pre class="prettyprint source lang-javascript"><code>chapi perspective destroy --force 1234567890</code></pre><p>Piped-in JSON data can also be given to functions to make it easier to pass in large JSON data. For instance, assume we have a file account.json:</p>
+<pre class="prettyprint source lang-json"><code>{
+  &quot;name&quot;: &quot;Example Account&quot;,
+  &quot;authentication&quot;: {
+    &quot;protocol&quot;: &quot;access_key&quot;,
+    &quot;access_key&quot;: &quot;QQQQQQQQQQQQQQQ&quot;,
+    &quot;secret_key&quot;: &quot;sosososososososososososososoSecret&quot;
+  },
+  &quot;billing&quot;: {
+    &quot;bucket&quot;: &quot;my-fake-billing-bucket&quot;
+  },
+  &quot;cloudtrail&quot;: {
+    &quot;enabled&quot;: &quot;true&quot;,
+    &quot;bucket&quot;: &quot;my-fake-cloudtrail-bucket&quot;
+  },
+  &quot;aws_config&quot;: {
+    &quot;enabled&quot;: &quot;true&quot;,
+    &quot;bucket&quot;: &quot;my-fake-aws-config-bucket&quot;,
+    &quot;prefix&quot;: &quot;foo&quot;
+  },
+  &quot;tags&quot;: [
+    {&quot;key&quot;: &quot;Environment&quot;, &quot;value&quot;: &quot;Production&quot;}
+  ]
+}</code></pre><p>We can give this data to our chapi command like this:</p>
+<pre class="prettyprint source lang-bash"><code>cat account.json | chapi account create</code></pre><p>To see a full list of commands, refer to the <a href="doc/DOC.md">Documentation</a></p></article>
+    </section>
+
+
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>components/account.js</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">provides methods for accessing and updating accounts via CloudHealth's API</div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li><a href="mailto:ben.watson@coxautoinc.com">Ben Watson</a></li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_account.js.html">components/account.js</a>, <a href="components_account.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://github.com/cloudhealth/cht_api_guide/blob/master/account_api.md">cht_api_guide</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>components/asset.js</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">provides methods for querying and viewing assets via CloudHealth's API</div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li><a href="mailto:ben.watson@coxautoinc.com">Ben Watson</a></li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_asset.js.html">components/asset.js</a>, <a href="components_asset.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://github.com/cloudhealth/cht_api_guide/blob/master/assets_api.md">cht_api_guide</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>components/perspective.js</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">provides methods for accessing and updating perspectives via CloudHealth's API</div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li><a href="mailto:ben.watson@coxautoinc.com">Ben Watson</a></li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_perspective.js.html">components/perspective.js</a>, <a href="components_perspective.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://github.com/cloudhealth/cht_api_guide/blob/master/perspectives_api.md">cht_api_guide</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>components/report.js</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">provides methods for fetching reports via CloudHealth's API</div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li><a href="mailto:ben.watson@coxautoinc.com">Ben Watson</a></li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_report.js.html">components/report.js</a>, <a href="components_report.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://github.com/CloudHealth/cht_api_guide#reporting-api">https://github.com/CloudHealth/cht_api_guide#reporting-api</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>components/tag.js</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">provides methods for adding, changing, and removing tags from
+           accounts and assets via CloudHealth's API (to get a list of tags
+           for an asset or account, see
+           <a href="module-cloud-health-api.Asset.html#query">asset api</a> or
+           <a href="module-cloud-health-api.Account.html#get">account api</a>)</div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li><a href="mailto:ben.watson@coxautoinc.com">Ben Watson</a></li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_tag.js.html">components/tag.js</a>, <a href="components_tag.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://github.com/cloudhealth/cht_api_guide/blob/master/customer_tags_api.md">cht_api_guide</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>index.js</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">Contains components that encapuslate the Rest APIs for the popular
+           CloudHealth cloud management system</div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li><a href="mailto:ben.watson@coxautoinc.com">Ben Watson</a></li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>utils/chapi.js</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">this library provides several shared functions that are used
+           throughout the cloud-health-api module</div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li><a href="mailto:ben.watson@coxautoinc.com">Ben Watson</a></li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utils_chapi.js.html">utils/chapi.js</a>, <a href="utils_chapi.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>utils/commands.js</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">this library defines functions which implement the various
+           commands that are given to the chapi command-line tool</div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li><a href="mailto:ben.watson@coxautoinc.com">Ben Watson</a></li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utils_commands.js.html">utils/commands.js</a>, <a href="utils_commands.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-cloud-health-api.html">cloud-health-api</a></li></ul><h3>Classes</h3><ul><li><a href="module-cloud-health-api.Account.html">Account</a></li><li><a href="module-cloud-health-api.Asset.html">Asset</a></li><li><a href="module-cloud-health-api.Perspective.html">Perspective</a></li><li><a href="module-cloud-health-api.Report.html">Report</a></li><li><a href="module-cloud-health-api.Tag.html">Tag</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-cloud-health-api.commands.html">commands</a></li><li><a href="module-cloud-health-api.utils.html">utils</a></li></ul><h3>Global</h3><ul><li><a href="global.html#get_package_json">get_package_json</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Tue Dec 13 2016 18:55:04 GMT-0500 (EST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
