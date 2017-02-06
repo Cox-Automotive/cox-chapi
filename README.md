@@ -69,7 +69,7 @@ Examples can be found in the examples folder under the folder for their componen
 
 ## Documentation
 
-HTML pages containing documentation for all components of this module can be found in `/doc/cox-chapi/1.0.0` or the same information can be found in a markdown file at `doc/Doc.md`. Note: To view the html pages, download them and open them with your browser
+HTML pages containing documentation for all components of this module can be found at https://cox-automotive.github.io/cox-chapi/docs/cox-chapi/1.0.0/ or the same information can be found in a markdown file at `docs/Doc.md`.
 
 ## Command Line
 
