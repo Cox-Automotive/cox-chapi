@@ -14,7 +14,7 @@
   },
   "scripts": {
     "test": "istanbul cover _mocha -- -R spec --recursive",
-    "jsdoc": "rm -r ./doc 2> /dev/null; jsdoc -c ./jsdoc.json -r -P ./package.json -R ./README.md -d doc .; jsdoc2md --src index.js --src ./components/**/*.js --src ./utils/**/*.js --separators > ./doc/DOC.md"
+    "jsdoc": "rm -r ./docs 2> /dev/null; jsdoc -c ./jsdoc.json -r -P ./package.json -R ./README.md -d docs .; jsdoc2md --src index.js --src ./components/**/*.js --src ./utils/**/*.js --separators > ./docs/DOC.md"
   },
   "keywords": [
     "cloud",
