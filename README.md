@@ -1,6 +1,6 @@
 # chapi
 
-Note: This node module is developed entirely separate from the CloudHealth application. This module is not guaranteed to always function properly with CloudHealth's API due to the potential of their API changing and the fact that this module is not maintained by the same developers that developed the CloudHealth application or API. However, we are in contact with CloudHealth and will update this tool to cover changes to their API.
+Note: This node module is developed entirely separate from the CloudHealth application and APIs (https://github.com/CloudHealth/cht_api_guide). This module is not guaranteed to always function properly with CloudHealth's API due to the potential of their API changing and the fact that this module is not maintained by the same developers that developed the CloudHealth application or API. However, we are in contact with CloudHealth and will update this tool to cover changes to their API.
 
 ## Installation
 
