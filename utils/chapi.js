@@ -102,9 +102,10 @@ function _options(base, method, path, params, api_key) {
  */
 function _parse_stdin_data(data) {
   var params;
+
   // if data should be treated as json
-  if (data.trim().match(/^\{.*\}$/)) {
-    params = [data];
+  if (data.trim().match(/^\{(.|\r|\t|\n)*\}$/)) {
+    params = [data.trim().replace(/(\n|\r|\t)/g, '')];
   }
   // split the data by spaces
   else {
