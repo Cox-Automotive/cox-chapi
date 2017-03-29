@@ -82,7 +82,7 @@ function _options(base, method, path, params, api_key) {
   }
 
   return {
-    host: 'https://chapi.cloudhealthtech.com',
+    host: 'chapi.cloudhealthtech.com',
     port: 443,
     path: base + path,
     method: method.toUpperCase(),
