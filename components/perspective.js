@@ -151,7 +151,7 @@ Perspective.prototype.list_groups = function(pers, cb) {
   if (typeof pers === 'object') {
     // get the groups object from the list of constants
     var groups = pers.constants.find(
-      (constant) => constant.type.toLowerCase() === 'group'
+      (constant) => constant.type.toLowerCase() === 'static group'
     );
     cb(null, groups.list);
   }

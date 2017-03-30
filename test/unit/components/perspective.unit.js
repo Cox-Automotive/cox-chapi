@@ -192,7 +192,7 @@ describe('Perspective', function() {
       var pers = {
         constants: [
           {
-            type: 'group',
+            type: 'Static Group',
             list: test_groups,
           },
         ],
@@ -210,7 +210,7 @@ describe('Perspective', function() {
       var pers = {
         constants: [
           {
-            type: 'GROUP',
+            type: 'STATIC GROUP',
             list: test_groups,
           },
         ],
@@ -228,7 +228,7 @@ describe('Perspective', function() {
       var pers = {
         constants: [
           {
-            type: 'group',
+            type: 'Static Group',
             list: test_groups,
           },
         ],
