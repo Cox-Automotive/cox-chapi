@@ -30,7 +30,7 @@ describe('chapi utils', function() {
       var spaced_json = ' { "one ": "1", "two":   "2" }  ';
       var params = utils._parse_stdin_data(spaced_json);
 
-      var param_check = [spaced_json];
+      var param_check = [spaced_json.trim()];
 
       expect(params).to.eql(param_check);
 		});
@@ -1090,9 +1090,9 @@ describe('chapi utils', function() {
       delete process.env['CHAPI_DEV_MODE'];
 
       var msg = 'test';
+      var exit = sinon.stub(process, 'exit');
       var error = sinon.stub(console, 'error', function(str) {
         expect(str).to.equal(msg);
-        error.restore();
         done();
       });
 
@@ -1102,6 +1102,9 @@ describe('chapi utils', function() {
       catch (e) {
         expect('Custom message: an error was thrown').to.be.false;
       }
+
+      error.restore();
+      exit.restore();
     });
 
     after(function() {
