@@ -1,11 +1,7 @@
 var expect = require('chai').expect;
 var sinon = require('sinon');
-var proxyquire = require('proxyquire');
-
 var utils = require('../../../utils/chapi');
-var Tag = proxyquire('../../../components/tag', {
-  'utils': utils,
-});
+var Tag = require('../../../components/tag');
 
 describe('Tag', function() {
   describe('constructor', function() {

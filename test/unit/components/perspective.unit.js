@@ -1,15 +1,7 @@
 var expect = require('chai').expect;
 var sinon = require('sinon');
-var proxyquire = require('proxyquire');
-
-var https = {
-  request: sinon.stub(),
-};
 var utils = require('../../../utils/chapi');
-var Perspective = proxyquire('../../../components/perspective', {
-  'https': https,
-  '../utils/chapi.js': utils,
-});
+var Perspective = require('../../../components/perspective');
 var EventEmitter = require('events');
 
 describe('Perspective', function() {
