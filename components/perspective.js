@@ -87,6 +87,7 @@ Perspective.prototype._get_cb = function(flags, id, cb, err, result) {
   if (err) return cb(err, result);
 
   result = result.schema;
+
   result.id = id;
   return cb(null, result);
 };
@@ -326,9 +327,16 @@ Perspective.prototype.create = function(perspective, cb) {
 Perspective.prototype.update = function(perspective, cb) {
   if (perspective.hasOwnProperty('schema')) {
     perspective = perspective.schema;
+    // filters out constant type 'Version' which is no longer acceptable
+    var constants = perspective.constants;
+    perspective.constants = constants.filter((constant) => {
+      return constant.type !== 'Version';
+    })
   }
 
   var options = this._options('PUT', '/' + perspective.id);
+
+
 
   utils.send_request(options, JSON.stringify({schema: perspective}), cb);
 };

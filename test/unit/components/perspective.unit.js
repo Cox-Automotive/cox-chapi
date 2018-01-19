@@ -12,7 +12,7 @@ var Perspective = proxyquire('../../../components/perspective', {
 });
 var EventEmitter = require('events');
 
-describe('Perspective', function() {
+describe.only('Perspective', function() {
   var p;
 
   describe('constructor', function() {
@@ -1307,6 +1307,19 @@ describe('Perspective', function() {
       request.restore();
     });
 
+    it('should parse out the constant type "Version" from all schemas', function() {
+      var obj = {schema: {constants: [{type: 'Version'},{type: 'Static Group'}]}};
+      var parsedObj = {schema: {constants: [{type: 'Static Group'}]}};
+
+      var request = sinon.stub(utils, 'send_request')
+
+      p.update(obj, function(err, json) {});
+      expect(request.args[0][1]).to.equal(JSON.stringify(parsedObj));
+
+      request.restore();
+
+    });
+
     it('should call the callback with an error if #_send_request fails', function(done) {
       var error = new Error('test');
 
@@ -1336,7 +1349,7 @@ describe('Perspective', function() {
     });
 
     it('should not wrap the new perspective in "schema" again if it contains the schema field already', function(done) {
-      var obj = {schema: {test: 'test'}};
+      var obj = {schema: {constants: [{type: 'test'}]}};
 
       var request = sinon.stub(utils, 'send_request', function(options, send_data, cb) {
         expect(JSON.parse(send_data)).to.eql(obj);
