@@ -12,7 +12,7 @@ var Perspective = proxyquire('../../../components/perspective', {
 });
 var EventEmitter = require('events');
 
-describe.only('Perspective', function() {
+describe('Perspective', function() {
   var p;
 
   describe('constructor', function() {
@@ -1265,7 +1265,7 @@ describe.only('Perspective', function() {
         done();
       });
 
-      p.update({id: 1}, function(err, json) {});
+      p.update({id: 1, constants: [{type: 'test'}]}, function(err, json) {});
 
       request.restore();
     });
@@ -1278,7 +1278,7 @@ describe.only('Perspective', function() {
         done();
       });
 
-      special_p.update({id: 1}, function(err, json) {});
+      special_p.update({id: 1, constants: [{type: 'test'}]}, function(err, json) {});
 
       request.restore();
     });
@@ -1289,7 +1289,7 @@ describe.only('Perspective', function() {
         done();
       });
 
-      p.update({id: 1}, function(err, json) {});
+      p.update({id: 1, constants: [{type: 'test'}]}, function(err, json) {});
 
       request.restore();
     });
@@ -1302,7 +1302,7 @@ describe.only('Perspective', function() {
         done();
       });
 
-      p.update({id: id}, function(err, json) {});
+      p.update({id: id, constants: [{type: 'test'}]}, function(err, json) {});
 
       request.restore();
     });
@@ -1327,7 +1327,7 @@ describe.only('Perspective', function() {
         cb(error);
       });
 
-      p.update({id: 1}, function(err, json) {
+      p.update({id: 1, constants: [{type: 'test'}]}, function(err, json) {
         expect(err).to.equal(error);
         done();
       });
@@ -1336,7 +1336,7 @@ describe.only('Perspective', function() {
     });
 
     it('should wrap the new perspective in a object under the "schema" field', function(done) {
-      var obj = {test: 'test'};
+      var obj = {test: 'test', constants: [{type: 'test'}]};
 
       var request = sinon.stub(utils, 'send_request', function(options, send_data, cb) {
         expect(JSON.parse(send_data).schema).to.eql(obj);
@@ -1370,7 +1370,7 @@ describe.only('Perspective', function() {
         cb(null, test_json);
       });
 
-      p.update({id: 1}, function(err, json) {
+      p.update({id: 1, constants: [{type: 'test'}]}, function(err, json) {
         expect(json).to.equal(test_json);
         done();
       });

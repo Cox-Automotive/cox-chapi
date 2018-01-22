@@ -327,16 +327,14 @@ Perspective.prototype.create = function(perspective, cb) {
 Perspective.prototype.update = function(perspective, cb) {
   if (perspective.hasOwnProperty('schema')) {
     perspective = perspective.schema;
-    // filters out constant type 'Version' which is no longer acceptable
-    var constants = perspective.constants;
-    perspective.constants = constants.filter((constant) => {
-      return constant.type !== 'Version';
-    })
   }
+  // filters out constant type 'Version' which is no longer acceptable
+  var constants = perspective.constants;
+  perspective.constants = constants.filter((constant) => {
+    return constant.type !== 'Version';
+  })
 
   var options = this._options('PUT', '/' + perspective.id);
-
-
 
   utils.send_request(options, JSON.stringify({schema: perspective}), cb);
 };
