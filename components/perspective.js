@@ -251,6 +251,22 @@ Perspective.prototype._get_rule = function(pers, group_id) {
 };
 
 /**
+ * remove previous references to an account within the rules of the schema
+ * @function module:cox-chapi.Perspective#remove_prev_refs
+ * @param {object} pers - a perspective containing rules
+ * @param  {string} account_ref_id ref_id of the account
+ * @returns {Object}               returns updated perspective schema
+ */
+Perspective.prototype.remove_prev_refs = function(pers, account_ref_id) {
+  pers.rules = pers.rules.map((rule) => {
+    if (rules.asset === 'AwsAccount'){
+      rule.condition.clauses = rule.condition.clauses.filter(clause => clause.asset_ref !== account_ref_id);
+    };
+  });
+  return pers;
+}
+
+/**
  *  gets a JSON object containing all the perspectives
  *  @function module:cox-chapi.Perspective#list
  *  @param {object} [flags] - an optional flags object
