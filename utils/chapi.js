@@ -458,7 +458,7 @@ function set_cache(cache_name, cache, cb) {
       if (cb) return cb(err1);
       else throw err1;
     }
-
+    console.log('inside set_cache');
     settings.cache[cache_name] = cache;
 
     this._set_settings(settings, (err2, settings) => {
