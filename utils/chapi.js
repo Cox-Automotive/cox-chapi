@@ -410,6 +410,7 @@ function send_request(flags, options, send_data, cb) {
       }
 
       if((res.statusCode < 200) || (res.statusCode >= 300)) {
+        console.log(json);
         cb(new Error('Request received status code: ' + res.statusCode + '\n'), json);
       }
       else {

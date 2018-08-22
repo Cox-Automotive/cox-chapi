@@ -6,6 +6,7 @@
 
 var https = require('https');
 var utils = require('../utils/chapi.js');
+var fs = require('fs');
 
 /**
  *  @class Perspective
@@ -50,25 +51,20 @@ Perspective.prototype._options = function(method, path, params) {
  */
 Perspective.prototype.get = function(flags, id, cb) {
   if (typeof id === 'function') {
-    console.log('inside if checking id type');
     cb = id;
     id = flags;
     flags = null;
   }
   // ensure id is a string
   id = '' + id;
-  console.log(flags);
-  console.log(id);
   // if "id" is a name, lookup the name
   if (!id.match(/^[0-9]+$/)) {
-    console.log('inside if of get')
     this._lookup_id(flags, id, (err, id) => {
       if (err) return cb(err, id);
       this.get(id, cb);
     });
   }
   else {
-    console.log('before _get in get in perspective definition');
     return this._get(flags, id, cb);
   }
 }
@@ -79,7 +75,6 @@ Perspective.prototype.get = function(flags, id, cb) {
  */
 Perspective.prototype._get = function(flags, id, cb) {
   var options = this._options('GET', '/' + id, ['include_version=true']);
-  console.log('after options in _get');
   utils.send_request(options, null, this._get_cb.bind(this, flags, id, cb));
 };
 
@@ -228,24 +223,24 @@ Perspective.prototype.add_to_group = function(pers, accts, group_name, cb) {
  *  @function module:cox-chapi.Perspective#_get_rule
  *  @private
  *  @param {object} pers - a perspective containing rules
- *  @param {string} group_id - the id of the group that the rule points to
+ *  @param {string} to_group_id - the id of the group that the rule points to
  *  @return {object} the matching rule, or a new rule that has already been
  *                   added to the perspective
  */
-Perspective.prototype._get_rule = function(pers, group_id) {
+Perspective.prototype._get_rule = function(pers, to_group_id) {
   // get the rule specifying accounts that belong to this group
   var rule;
-  console.log(pers);
+
   if (pers.rules.length) {
     rule = pers.rules.find(
-      (rule) => rule.asset === 'AwsAccount' && rule.to === group_id
+      (rule) => rule.asset === 'AwsAccount' && rule.to === to_group_id && rule.from === undefined
     );
   }
   // if the rule doesn't exist, make a rule
   if (!rule) {
     rule = {
       asset: 'AwsAccount',
-      to: group_id,
+      to: to_group_id,
       type: 'filter',
       condition: {
         clauses: [],
@@ -253,7 +248,6 @@ Perspective.prototype._get_rule = function(pers, group_id) {
     };
     pers.rules.push(rule);
   }
-
   return rule;
 };
 
@@ -265,17 +259,12 @@ Perspective.prototype._get_rule = function(pers, group_id) {
  * @returns {Object}               returns updated perspective schema
  */
 Perspective.prototype.remove_prev_refs = function(pers, account_ref_id) {
-  console.log(`account ref id: ${account_ref_id}`);
   pers.rules.forEach((rule) => {
     if (rule.asset === 'AwsAccount'){
-      rule.condition.clauses = rule.condition.clauses.filter(clause => {
-        console.log(`clause asset ref: ${clause.asset_ref}`);
-        return clause.asset_ref != account_ref_id;
-      });
+      rule.condition.clauses = rule.condition.clauses.filter(clause => clause.asset_ref != account_ref_id);
     };
   });
   pers.rules = pers.rules.filter(rule => rule.condition.clauses.length);
-  pers.rules.forEach(rule => console.log(`conditions: ${rule.condition.clauses}`));
   console.log(pers);
   return pers;
 }
