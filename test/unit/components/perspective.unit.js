@@ -904,9 +904,9 @@ describe('Perspective', function() {
     });
   });
 
-  describe('#remove_prev_refs', () => {
+  describe.only('#remove_prev_refs', () => {
     const account_ref_id = '1234';
-    const persInput = {
+    const pers = {
       rules: [
         {
           asset: 'AwsAccount',
@@ -957,9 +957,11 @@ describe('Perspective', function() {
       p = new Perspective();
     });
 
-    it('should remove any clauses that contain refs to the account and then remove empty rules', () => {
-      const result = p.remove_prev_refs(persInput, account_ref_id);
-      expect(result).to.be.eql(persOutput);
+    it('should remove any clauses that contain refs to the account and then remove empty rules', (done) => {
+      p.remove_prev_refs({ pers, account_ref_id }, (err, data) => {
+        expect(data).to.be.eql(persOutput);
+        done();
+      });
     });
   })
 
