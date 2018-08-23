@@ -6,7 +6,6 @@
 
 var https = require('https');
 var utils = require('../utils/chapi.js');
-var fs = require('fs');
 
 /**
  *  @class Perspective
@@ -223,7 +222,7 @@ Perspective.prototype.add_to_group = function(pers, accts, group_name, cb) {
  *  @function module:cox-chapi.Perspective#_get_rule
  *  @private
  *  @param {object} pers - a perspective containing rules
- *  @param {string} to_group_id - the id of the group that the rule points to
+ *  @param {string} group_id - the id of the group that the rule points to
  *  @return {object} the matching rule, or a new rule that has already been
  *                   added to the perspective
  */

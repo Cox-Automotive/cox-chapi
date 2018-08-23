@@ -410,7 +410,6 @@ function send_request(flags, options, send_data, cb) {
       }
 
       if((res.statusCode < 200) || (res.statusCode >= 300)) {
-        console.log(json);
         cb(new Error('Request received status code: ' + res.statusCode + '\n'), json);
       }
       else {
@@ -459,7 +458,6 @@ function set_cache(cache_name, cache, cb) {
       if (cb) return cb(err1);
       else throw err1;
     }
-    console.log('inside set_cache');
     settings.cache[cache_name] = cache;
 
     this._set_settings(settings, (err2, settings) => {
