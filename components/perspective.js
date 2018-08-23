@@ -227,20 +227,20 @@ Perspective.prototype.add_to_group = function(pers, accts, group_name, cb) {
  *  @return {object} the matching rule, or a new rule that has already been
  *                   added to the perspective
  */
-Perspective.prototype._get_rule = function(pers, to_group_id) {
+Perspective.prototype._get_rule = function(pers, group_id) {
   // get the rule specifying accounts that belong to this group
   var rule;
 
   if (pers.rules.length) {
     rule = pers.rules.find(
-      (rule) => rule.asset === 'AwsAccount' && rule.to === to_group_id && rule.from === undefined
+      (rule) => rule.asset === 'AwsAccount' && rule.to === group_id && rule.from === undefined
     );
   }
   // if the rule doesn't exist, make a rule
   if (!rule) {
     rule = {
       asset: 'AwsAccount',
-      to: to_group_id,
+      to: group_id,
       type: 'filter',
       condition: {
         clauses: [],
@@ -265,7 +265,6 @@ Perspective.prototype.remove_prev_refs = function(pers, account_ref_id) {
     };
   });
   pers.rules = pers.rules.filter(rule => rule.condition.clauses.length);
-  console.log(pers);
   return pers;
 }
 

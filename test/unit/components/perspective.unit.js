@@ -12,7 +12,7 @@ var Perspective = proxyquire('../../../components/perspective', {
 });
 var EventEmitter = require('events');
 
-describe('Perspective', function() {
+describe.only('Perspective', function() {
   var p;
 
   describe('constructor', function() {
@@ -815,6 +815,56 @@ describe('Perspective', function() {
       expect(test_rule).to.equal(rule);
     });
 
+    it('should NOT return a rule if the rule has a defined from field', function() {
+      var group_id = '1234';
+      var rule = {
+        asset: 'AwsAccount',
+        to: group_id,
+        from: '4567',
+        type: 'filter',
+        condition: {
+          clauses: [],
+        },
+      };
+      var pers = {
+        rules: [
+          rule,
+          {
+            asset: 'AwsAccount',
+            to: '5678',
+            type: 'filter',
+            condition: {
+              clauses: [],
+            },
+          },
+        ],
+      };
+
+      var test_rule = p._get_rule(pers, group_id);
+
+      expect(test_rule).to.not.equal(rule);
+    });
+
+    it('should return a new rule if the perspective has no rules', function() {
+      var group_id = '1234';
+      var rule = {
+        asset: 'AwsAccount',
+        to: group_id,
+        type: 'filter',
+        condition: {
+          clauses: [],
+        },
+      };
+      var pers = {
+        rules: [],
+      };
+
+      var test_rule = p._get_rule(pers, group_id);
+
+      expect(test_rule).to.eql(rule);
+      expect(pers.rules).to.contain(rule);
+    });
+
     it('should return a new rule if no matching rule is found', function() {
       var group_id = '1234';
       var rule = {
@@ -853,6 +903,65 @@ describe('Perspective', function() {
       expect(p._api_key).to.equal(str);
     });
   });
+
+  describe('#remove_prev_refs', () => {
+    const account_ref_id = '1234';
+    const persInput = {
+      rules: [
+        {
+          asset: 'AwsAccount',
+          to: '5678',
+          type: 'filter',
+          condition: {
+            clauses: [
+              {
+                asset_ref: '1234',
+              },
+              {
+                asset_ref: '2345',
+              }
+            ],
+          },
+        },
+        {
+          asset: 'AwsAccount',
+          to: '5678',
+          type: 'filter',
+          condition: {
+            clauses: [
+              {
+                asset_ref: '1234',
+              }
+            ],
+          },
+        },
+      ]
+    };
+    const persOutput = {
+      rules: [
+        {
+          asset: 'AwsAccount',
+          to: '5678',
+          type: 'filter',
+          condition: {
+            clauses: [
+              {
+                asset_ref: '2345',
+              }
+            ],
+          },
+        },
+      ]
+    };
+    before(function() {
+      p = new Perspective();
+    });
+
+    it('should remove any clauses that contain refs to the account and then remove empty rules', () => {
+      const result = p.remove_prev_refs(persInput, account_ref_id);
+      expect(result).to.be.eql(persOutput);
+    });
+  })
 
   describe('#list', function() {
     before(function() {
