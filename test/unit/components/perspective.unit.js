@@ -904,7 +904,7 @@ describe('Perspective', function() {
     });
   });
 
-  describe.only('#remove_prev_refs', () => {
+  describe('#remove_prev_refs', () => {
     const account_ref_id = '1234';
     const pers = {
       rules: [
