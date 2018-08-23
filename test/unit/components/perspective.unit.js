@@ -12,7 +12,7 @@ var Perspective = proxyquire('../../../components/perspective', {
 });
 var EventEmitter = require('events');
 
-describe.only('Perspective', function() {
+describe('Perspective', function() {
   var p;
 
   describe('constructor', function() {
