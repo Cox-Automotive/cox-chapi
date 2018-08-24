@@ -56,7 +56,6 @@ Perspective.prototype.get = function(flags, id, cb) {
   }
   // ensure id is a string
   id = '' + id;
-
   // if "id" is a name, lookup the name
   if (!id.match(/^[0-9]+$/)) {
     this._lookup_id(flags, id, (err, id) => {
@@ -75,7 +74,6 @@ Perspective.prototype.get = function(flags, id, cb) {
  */
 Perspective.prototype._get = function(flags, id, cb) {
   var options = this._options('GET', '/' + id, ['include_version=true']);
-
   utils.send_request(options, null, this._get_cb.bind(this, flags, id, cb));
 };
 
@@ -230,10 +228,13 @@ Perspective.prototype.add_to_group = function(pers, accts, group_name, cb) {
  */
 Perspective.prototype._get_rule = function(pers, group_id) {
   // get the rule specifying accounts that belong to this group
-  var rule = pers.rules.find(
-    (rule) => rule.asset === 'AwsAccount' && rule.to === group_id
-  );
+  var rule;
 
+  if (pers.rules.length) {
+    rule = pers.rules.find(
+      (rule) => rule.asset === 'AwsAccount' && rule.to === group_id && rule.from === undefined
+    );
+  }
   // if the rule doesn't exist, make a rule
   if (!rule) {
     rule = {
@@ -246,9 +247,27 @@ Perspective.prototype._get_rule = function(pers, group_id) {
     };
     pers.rules.push(rule);
   }
-
   return rule;
 };
+
+/**
+ * remove previous references to an account within the rules of the schema
+ * @function module:cox-chapi.Perspective#remove_prev_refs
+ * @param {object} options options object of params
+ * @param {object} options.pers - a perspective containing rules
+ * @param  {string} options.account_ref_id ref_id of the account
+ * @param  {objectCallback} cb - called with the updated pers object
+
+ */
+Perspective.prototype.remove_prev_refs = function({ pers, account_ref_id }, cb) {
+  pers.rules.forEach((rule) => {
+    if (rule.asset === 'AwsAccount'){
+      rule.condition.clauses = rule.condition.clauses.filter(clause => clause.asset_ref != account_ref_id);
+    };
+  });
+  pers.rules = pers.rules.filter(rule => rule.condition.clauses.length);
+  cb(null, pers);
+}
 
 /**
  *  gets a JSON object containing all the perspectives

@@ -113,7 +113,7 @@ Account.prototype._list_cb = function(flags, cb, err, result) {
  *  @param {arrayCallback} cb - called with an array of accounts
  */
 Account.prototype._list_all = function(cb) {
-  this.list({stats: true}, (err, stats) => {
+  this.list({stats: true, page_count: 200}, (err, stats) => {
     if (err) return cb(err);
     var calls = [];
     for (var i=0, len=stats.page_count; i<len; i++) {
@@ -171,7 +171,7 @@ Account.prototype._find_by = function(field, value, list, cb) {
     cb(null, matches);
   }
   else {
-    this.list({all: true}, (err, matches) => {
+    this.list({all: true, page_count: 200}, (err, matches) => {
       if (err) return cb(err);
       this.find_by(field, value, matches, cb);
     });
