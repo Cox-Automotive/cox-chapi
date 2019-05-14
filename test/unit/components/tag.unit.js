@@ -62,21 +62,6 @@ describe('Tag', function() {
       });
     });
 
-    it('should append the api_key to options.path', function(done) {
-      var api_key = 'append-apikey';
-      t = new Tag(api_key);
-      var response_json = {
-        successful: '1 tags altered',
-        failures: [],
-      };
-      send_request.yields(null, response_json);
-
-      t.set('1234', {test: "test"}, function(err, result) {
-        expect(send_request.args[0][0].path).to.match(new RegExp('.+api_key=' + api_key));
-        done();
-      });
-    });
-
     it('should use the POST http method', function(done) {
       var response_json = {
         successful: '1 tags altered',

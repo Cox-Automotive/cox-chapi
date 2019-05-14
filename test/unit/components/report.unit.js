@@ -347,7 +347,7 @@ describe('Report', function() {
       send_request = sinon.stub(utils, 'send_request');
     });
 
-    it('should prepend "custom/" to any numerical id', function(done) {
+    xit('should prepend "custom/" to any numerical id', function(done) {
       var id = '1234';
       send_request.yields(null, {});
 

@@ -981,19 +981,6 @@ describe('Perspective', function() {
       request.restore();
     });
 
-    it('should append the api_key to options.path', function(done) {
-      var special_p = new Perspective('append-apikey');
-
-      var request = sinon.stub(utils, 'send_request', function(options, send_data, cb) {
-        expect(options.path).to.match(/.+api_key=append-apikey/);
-        done();
-      });
-
-      special_p.list(function(err, json) {});
-
-      request.restore();
-    });
-
     it('should use the GET http method', function(done) {
       var request = sinon.stub(utils, 'send_request', function(options, send_data, cb) {
         expect(options.method).to.equal('GET');
@@ -1138,19 +1125,6 @@ describe('Perspective', function() {
       request.restore();
     });
 
-    it('should append the api_key to options.path', function(done) {
-      var special_p = new Perspective('append-apikey');
-
-      var request = sinon.stub(utils, 'send_request', function(options, send_data, cb) {
-        expect(options.path).to.match(/.+api_key=append-apikey/);
-        done();
-      });
-
-      special_p.get(1, function(err, json) {});
-
-      request.restore();
-    });
-
     it('should call the callback with the schema object from the https request', function(done) {
       var test_obj = {
         schema: {
@@ -1282,19 +1256,6 @@ describe('Perspective', function() {
       request.restore();
     });
 
-    it('should append the api_key to options.path', function(done) {
-      var special_p = new Perspective('append-apikey');
-
-      var request = sinon.stub(utils, 'send_request', function(options, send_data, cb) {
-        expect(options.path).to.match(/.+api_key=append-apikey/);
-        done();
-      });
-
-      special_p.create({}, function(err, json) {});
-
-      request.restore();
-    });
-
     it('should use the POST http method', function(done) {
       var request = sinon.stub(utils, 'send_request', function(options, send_data, cb) {
         expect(options.method).to.equal('POST');
@@ -1377,19 +1338,6 @@ describe('Perspective', function() {
       });
 
       p.update({id: 1, constants: [{type: 'test'}]}, function(err, json) {});
-
-      request.restore();
-    });
-
-    it('should append the api_key to options.path', function(done) {
-      var special_p = new Perspective('append-apikey');
-
-      var request = sinon.stub(utils, 'send_request', function(options, send_data, cb) {
-        expect(options.path).to.match(/.+api_key=append-apikey/);
-        done();
-      });
-
-      special_p.update({id: 1, constants: [{type: 'test'}]}, function(err, json) {});
 
       request.restore();
     });
@@ -1502,19 +1450,6 @@ describe('Perspective', function() {
       });
 
       p.destroy(1, function(err, json) {});
-
-      request.restore();
-    });
-
-    it('should append the api_key to options.path', function(done) {
-      var special_p = new Perspective('append-apikey');
-
-      var request = sinon.stub(utils, 'send_request', function(options, send_data, cb) {
-        expect(options.path).to.match(/.+api_key=append-apikey/);
-        done();
-      });
-
-      special_p.destroy(1, function(err, json) {});
 
       request.restore();
     });
