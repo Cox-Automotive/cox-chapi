@@ -347,13 +347,13 @@ describe('Report', function() {
       send_request = sinon.stub(utils, 'send_request');
     });
 
-    xit('should prepend "custom/" to any numerical id', function(done) {
+    it('should prepend "custom/" to any numerical id', function(done) {
       var id = '1234';
       send_request.yields(null, {});
 
       r.get(id, (err, result) => {
         expect(send_request.called).to.be.true;
-        expect(send_request.args[0][0].path).to.match(new RegExp('olap_reports/custom/' + id + '[?]?.+$'));
+        expect(send_request.args[0][0].path).to.match(new RegExp('olap_reports/custom/' + id + '[?]?.*$'));
         done();
       });
     });
