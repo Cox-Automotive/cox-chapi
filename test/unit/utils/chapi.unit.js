@@ -1291,11 +1291,12 @@ describe('chapi utils', function() {
       expect(options).to.eql({
         host: 'chapi.cloudhealthtech.com',
         port: 443,
-        path: '/test?api_key=1234',
+        path: '/test',
         method: 'GET',
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer 1234'
         },
       });
     });
@@ -1306,11 +1307,12 @@ describe('chapi utils', function() {
       expect(options).to.eql({
         host: 'chapi.cloudhealthtech.com',
         port: 443,
-        path: '/test/other?api_key=1234',
+        path: '/test/other',
         method: 'GET',
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer 1234'
         },
       });
     });
@@ -1321,11 +1323,12 @@ describe('chapi utils', function() {
       expect(options).to.eql({
         host: 'chapi.cloudhealthtech.com',
         port: 443,
-        path: '/test/other?test=false&api_key=1234',
+        path: '/test/other?test=false',
         method: 'GET',
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer 1234'
         },
       });
     });
@@ -1336,11 +1339,12 @@ describe('chapi utils', function() {
       expect(options).to.eql({
         host: 'chapi.cloudhealthtech.com',
         port: 443,
-        path: '/test/other?test=true&api_key=1234',
+        path: '/test/other?test=true',
         method: 'POST',
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer 1234'
         },
       });
     });

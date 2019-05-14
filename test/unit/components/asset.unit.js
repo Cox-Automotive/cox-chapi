@@ -142,19 +142,6 @@ describe('Asset', function() {
       request.restore();
     });
 
-    it('should append the api_key to options.path', function(done) {
-      var special_a = new Asset('append-apikey');
-
-      var request = sinon.stub(utils, 'send_request', function(options, send_data, cb) {
-        expect(options.path).to.match(/.+api_key=append-apikey/);
-        done();
-      });
-
-      special_a.list_types(function(err, json) {});
-
-      request.restore();
-    });
-
     it('should use the GET http method', function(done) {
       var request = sinon.stub(utils, 'send_request', function(options, send_data, cb) {
         expect(options.method).to.equal('GET');
@@ -211,19 +198,6 @@ describe('Asset', function() {
       request.restore();
     });
 
-    it('should append the api_key to options.path', function(done) {
-      var special_a = new Asset('append-apikey');
-
-      var request = sinon.stub(utils, 'send_request', function(options, send_data, cb) {
-        expect(options.path).to.match(/.+api_key=append-apikey/);
-        done();
-      });
-
-      special_a.fields_for('AwsAccounts', function(err, json) {});
-
-      request.restore();
-    });
-
     it('should use the GET http method', function(done) {
       var request = sinon.stub(utils, 'send_request', function(options, send_data, cb) {
         expect(options.method).to.equal('GET');
@@ -276,19 +250,6 @@ describe('Asset', function() {
       });
 
       a.query({asset_type: 'test'}, function(err, json) {});
-
-      request.restore();
-    });
-
-    it('should append the api_key to options.path', function(done) {
-      var special_a = new Asset('append-apikey');
-
-      var request = sinon.stub(utils, 'send_request', function(options, send_data, cb) {
-        expect(options.path).to.match(/.+api_key=append-apikey/);
-        done();
-      });
-
-      special_a.query({asset_type: 'test'}, function(err, json) {});
 
       request.restore();
     });

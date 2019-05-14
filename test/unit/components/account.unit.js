@@ -181,19 +181,6 @@ describe('Account', function() {
       request.restore();
     });
 
-    it('should append the api_key to options.path', function(done) {
-      var special_a = new Account('append-apikey');
-
-      var request = sinon.stub(utils, 'send_request', function(flags, options, send_data, cb) {
-        expect(options.path).to.match(/.+api_key=append-apikey/);
-        done();
-      });
-
-      special_a.list({}, function(err, json) {});
-
-      request.restore();
-    });
-
     it('should call #_list_all if the "all" flag is true', function(done) {
       var list_all = sinon.spy(a, '_list_all');
 
@@ -305,19 +292,6 @@ describe('Account', function() {
       });
 
       a.get({}, function(err, json) {});
-
-      request.restore();
-    });
-
-    it('should append the api_key to options.path', function(done) {
-      var special_a = new Account('append-apikey');
-
-      var request = sinon.stub(utils, 'send_request', function(options, send_data, cb) {
-        expect(options.path).to.match(/.+api_key=append-apikey/);
-        done();
-      });
-
-      special_a.get(1, function(err, json) {});
 
       request.restore();
     });
@@ -476,19 +450,6 @@ describe('Account', function() {
       request.restore();
     });
 
-    it('should append the api_key to options.path', function(done) {
-      var special_a = new Account('append-apikey');
-
-      var request = sinon.stub(utils, 'send_request', function(options, send_data, cb) {
-        expect(options.path).to.match(/.+api_key=append-apikey/);
-        done();
-      });
-
-      special_a.create({}, function(err, json) {});
-
-      request.restore();
-    });
-
     it('should use the POST http method', function(done) {
       var request = sinon.stub(utils, 'send_request', function(options, send_data, cb) {
         expect(options.method).to.equal('POST');
@@ -545,19 +506,6 @@ describe('Account', function() {
       });
 
       a.update({id: 1}, function(err, json) {});
-
-      request.restore();
-    });
-
-    it('should append the api_key to options.path', function(done) {
-      var special_a = new Account('append-apikey');
-
-      var request = sinon.stub(utils, 'send_request', function(options, send_data, cb) {
-        expect(options.path).to.match(/.+api_key=append-apikey/);
-        done();
-      });
-
-      special_a.update({id: 1}, function(err, json) {});
 
       request.restore();
     });
@@ -631,19 +579,6 @@ describe('Account', function() {
       });
 
       a.destroy(1, function(err, json) {});
-
-      request.restore();
-    });
-
-    it('should append the api_key to options.path', function(done) {
-      var special_a = new Account('append-apikey');
-
-      var request = sinon.stub(utils, 'send_request', function(options, send_data, cb) {
-        expect(options.path).to.match(/.+api_key=append-apikey/);
-        done();
-      });
-
-      special_a.destroy(1, function(err, json) {});
 
       request.restore();
     });

@@ -353,7 +353,7 @@ describe('Report', function() {
 
       r.get(id, (err, result) => {
         expect(send_request.called).to.be.true;
-        expect(send_request.args[0][0].path).to.match(new RegExp('olap_reports/custom/' + id + '[?]?.+$'));
+        expect(send_request.args[0][0].path).to.match(new RegExp('olap_reports/custom/' + id + '[?]?.*$'));
         done();
       });
     });

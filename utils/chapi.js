@@ -68,7 +68,6 @@ function _get_settings(cb) {
 function _options(base, method, path, params, api_key) {
   if (!path) path = '';
   if (!params) params = [];
-  params.push('api_key=' + api_key);
 
   var start = true;
   while (params.length) {
@@ -88,7 +87,8 @@ function _options(base, method, path, params, api_key) {
     method: method.toUpperCase(),
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${api_key}`
     },
   };
 }
