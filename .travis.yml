@@ -1,0 +1,7 @@
+language: node_js
+node_js:
+  - "stable"
+env:
+  - CHAPI_DEV_MODE=true
+install: npm i
+script: npm test
