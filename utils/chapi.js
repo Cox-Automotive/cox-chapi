@@ -88,7 +88,7 @@ function _options(base, method, path, params, api_key) {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authentication': `Bearer ${api_key}`
+      'Authorization': `Bearer ${api_key}`
     },
   };
 }
