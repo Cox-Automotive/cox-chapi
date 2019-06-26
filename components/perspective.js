@@ -269,6 +269,32 @@ Perspective.prototype.remove_prev_refs = function({ pers, account_ref_id }, cb) 
   cb(null, pers);
 }
 
+
+Perspective.prototype.remove_expired_blocks = function(pers){
+  const expiredObj = {};
+  pers.constants.forEach((constant) => {
+    constant.list.forEach((account) => {
+      if(account.name === "expired") {
+        expiredObj[account.ref_id] = account;
+      }
+    })
+    constant.list = constant.list.filter((account) => {
+      return account.name !== "expired";
+    })
+  });
+
+  let { rules } = pers;
+  rules.forEach((rule) => {
+    rule.condition.clauses = rule.condition.clauses.filter((clause) => {
+      return !expiredObj[clause.asset_ref];
+    })
+  })
+
+  rules = rules.filter(rule => rule.condition.clauses.length > 0)
+
+  perspective.rules = rules;
+}
+
 /**
  *  gets a JSON object containing all the perspectives
  *  @function module:cox-chapi.Perspective#list
@@ -352,7 +378,29 @@ Perspective.prototype.update = function(perspective, cb) {
   perspective.constants = constants.filter((constant) => {
     return constant.type !== 'Version';
   })
+  const expiredObj = {};
+  pers.constants.forEach((constant) => {
+    constant.list.forEach((account) => {
+      if(account.name === "expired") {
+        expiredObj[account.ref_id] = account;
+      }
+    })
+    constant.list = constant.list.filter((account) => {
+      return account.name !== "expired";
+    })
+  });
 
+  let { rules } = pers;
+  rules.forEach((rule) => {
+    rule.condition.clauses = rule.condition.clauses.filter((clause) => {
+      return !expiredObj[clause.asset_ref];
+    })
+  })
+
+  rules = rules.filter(rule => rule.condition.clauses.length > 0)
+
+  perspective.rules = rules;
+  
   var options = this._options('PUT', '/' + perspective.id);
 
   utils.send_request(options, JSON.stringify({schema: perspective}), cb);
