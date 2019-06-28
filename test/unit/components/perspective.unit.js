@@ -1326,7 +1326,7 @@ describe('Perspective', function() {
     });
   });
 
-  describe.only('#update', function() {
+  describe('#update', function() {
     var obj = {schema: {
         id: 14562347657632460435,
         constants: [
