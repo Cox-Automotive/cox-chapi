@@ -1326,7 +1326,78 @@ describe('Perspective', function() {
     });
   });
 
-  describe('#update', function() {
+  describe.only('#update', function() {
+    var obj = {schema: {
+        id: 14562347657632460435,
+        constants: [
+            { type: 'Static Group',
+              list: [
+                {
+                  name: "expired",
+                  "ref_id": "testRef0"
+                },
+                {
+                  name: "testAccount",
+                  "ref_id": "testRef1"
+                }
+              ]
+
+            },
+            {type: 'Version'}
+        ],
+        rules: [
+          {
+            condition: {
+              clauses: [
+                {
+                  asset_ref: 'testRef1'
+                },
+                {
+                  asset_ref: 'testRef3'
+                }
+              ]
+            }
+          },
+          {
+            condition: {
+              clauses: [
+                {
+                  asset_ref: 'testRef0'
+                }
+              ]
+            }
+          }
+        ]
+      }
+    };
+    var parsedObj = {schema: {
+        id: 14562347657632460435,
+        constants: [
+            { type: 'Static Group',
+              list: [
+                {
+                  name: "testAccount",
+                  "ref_id": "testRef1"
+                }
+              ]
+            }
+        ],
+        rules: [
+          {
+            condition: {
+              clauses: [
+                {
+                  asset_ref: 'testRef1'
+                },
+                {
+                  asset_ref: 'testRef3'
+                }
+              ]
+            }
+          }
+        ]
+      }
+    };
     before(function() {
       p = new Perspective();
     });
@@ -1337,7 +1408,7 @@ describe('Perspective', function() {
         done();
       });
 
-      p.update({id: 1, constants: [{type: 'test'}]}, function(err, json) {});
+      p.update(obj, function(err, json) {});
 
       request.restore();
     });
@@ -1348,7 +1419,7 @@ describe('Perspective', function() {
         done();
       });
 
-      p.update({id: 1, constants: [{type: 'test'}]}, function(err, json) {});
+      p.update(obj, function(err, json) {});
 
       request.restore();
     });
@@ -1361,15 +1432,22 @@ describe('Perspective', function() {
         done();
       });
 
-      p.update({id: id, constants: [{type: 'test'}]}, function(err, json) {});
+      p.update(obj, function(err, json) {});
 
       request.restore();
     });
 
     it('should parse out the constant type "Version" from all schemas', function() {
-      var obj = {schema: {constants: [{type: 'Version'},{type: 'Static Group'}]}};
-      var parsedObj = {schema: {constants: [{type: 'Static Group'}]}};
+      var request = sinon.stub(utils, 'send_request')
 
+      p.update(obj, function(err, json) {});
+      expect(request.args[0][1]).to.equal(JSON.stringify(parsedObj));
+
+      request.restore();
+
+    });
+
+    it('should remove any expired blocks from all schemas', function() {
       var request = sinon.stub(utils, 'send_request')
 
       p.update(obj, function(err, json) {});
@@ -1386,7 +1464,7 @@ describe('Perspective', function() {
         cb(error);
       });
 
-      p.update({id: 1, constants: [{type: 'test'}]}, function(err, json) {
+      p.update(obj, function(err, json) {
         expect(err).to.equal(error);
         done();
       });
@@ -1395,21 +1473,17 @@ describe('Perspective', function() {
     });
 
     it('should wrap the new perspective in a object under the "schema" field', function(done) {
-      var obj = {test: 'test', constants: [{type: 'test'}]};
-
       var request = sinon.stub(utils, 'send_request', function(options, send_data, cb) {
-        expect(JSON.parse(send_data).schema).to.eql(obj);
+        expect(JSON.parse(send_data).schema).to.eql(obj.schema);
         done();
       });
 
-      p.update(obj, function(err, json) {});
+      p.update(obj.schema, function(err, json) {});
 
       request.restore();
     });
 
     it('should not wrap the new perspective in "schema" again if it contains the schema field already', function(done) {
-      var obj = {schema: {constants: [{type: 'test'}]}};
-
       var request = sinon.stub(utils, 'send_request', function(options, send_data, cb) {
         expect(JSON.parse(send_data)).to.eql(obj);
         done();
@@ -1429,7 +1503,7 @@ describe('Perspective', function() {
         cb(null, test_json);
       });
 
-      p.update({id: 1, constants: [{type: 'test'}]}, function(err, json) {
+      p.update(obj, function(err, json) {
         expect(json).to.equal(test_json);
         done();
       });
