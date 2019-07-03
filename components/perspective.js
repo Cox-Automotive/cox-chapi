@@ -352,28 +352,6 @@ Perspective.prototype.update = function(perspective, cb) {
   perspective.constants = constants.filter((constant) => {
     return constant.type !== 'Version';
   })
-  const expiredObj = {};
-  perspective.constants.forEach((constant) => {
-    constant.list.forEach((account) => {
-      if(account.name === "expired") {
-        expiredObj[account.ref_id] = account;
-      }
-    })
-    constant.list = constant.list.filter((account) => {
-      return account.name !== "expired";
-    })
-  });
-
-  let { rules } = perspective;
-  rules.forEach((rule) => {
-    rule.condition.clauses = rule.condition.clauses.filter((clause) => {
-      return !expiredObj[clause.asset_ref];
-    })
-  })
-
-  rules = rules.filter(rule => rule.condition.clauses.length > 0)
-
-  perspective.rules = rules;
 
   var options = this._options('PUT', '/' + perspective.id);
 
