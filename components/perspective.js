@@ -2,6 +2,7 @@
  *  @overview provides methods for accessing and updating perspectives via CloudHealth's API
  *  @see {@link https://github.com/cloudhealth/cht_api_guide/blob/master/perspectives_api.md|cht_api_guide}
  *  @author Ben Watson <ben.watson@coxautoinc.com>
+ *  @author Tyrus Brenc <tyrus.brenc@coxautoinc.com>
  */
 
 var https = require('https');
