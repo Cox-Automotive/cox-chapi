@@ -95,7 +95,7 @@ Account.prototype._list_cb = function(flags, cb, err, result) {
   // handle call for only stats
   if (flags.stats) {
     var stats = {
-      page_count: result.link && (result.link.match(/&page=([0-9]+)>;\s?rel="last"/))[1],
+      page_count: result.link && (result.link.match(/page=([0-9]+)>;\s?rel="last"/))[1],
       per_page: result["x-per-page"],
       total: result["x-total"],
     };
