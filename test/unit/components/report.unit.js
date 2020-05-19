@@ -1,11 +1,7 @@
 var expect = require('chai').expect;
 var sinon = require('sinon');
-var proxyquire = require('proxyquire');
-
 var utils = require('../../../utils/chapi');
-var Report = proxyquire('../../../components/report', {
-  'utils': utils,
-});
+var Report = require('../../../components/report');
 
 describe('Report', function() {
   var r, api_key;

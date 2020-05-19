@@ -1,18 +1,12 @@
 var expect = require('chai').expect;
 var sinon = require('sinon');
 var proxyquire = require('proxyquire');
-
-var https = {
-  request: sinon.stub(),
-};
 var async = {
   parallel: function(){},
 };
 var utils = require('../../../utils/chapi');
 var Account = proxyquire('../../../components/account', {
-  'https': https,
-  'async': async,
-  'utils': utils,
+  'async': async
 });
 var EventEmitter = require('events');
 var real_async = require('async');

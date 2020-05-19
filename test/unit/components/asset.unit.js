@@ -1,15 +1,7 @@
 var expect = require('chai').expect;
 var sinon = require('sinon');
-var proxyquire = require('proxyquire');
-
-var https = {
-  request: sinon.stub(),
-};
 var utils = require('../../../utils/chapi');
-var Asset = proxyquire('../../../components/asset', {
-  'https': https,
-  'utils': utils,
-});
+var Asset = require('../../../components/asset')
 var EventEmitter = require('events');
 
 describe('Asset', function() {
