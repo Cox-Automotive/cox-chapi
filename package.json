@@ -1,6 +1,6 @@
 {
   "name": "cox-chapi",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "A node module that encapsulates API calls for cloudhealth",
   "main": "index.js",
   "dependencies": {
