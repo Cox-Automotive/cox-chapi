@@ -318,15 +318,15 @@ function read_stdin(cb) {
   var data = '';
   process.stdin.setEncoding('utf8');
 
-  process.stdin.on('data', function(chunk) {
+  process.stdin.prependListener('data', function(chunk) {
     data += chunk;
   });
 
-  process.stdin.on('end', function() {
+  process.stdin.prependListener('end', function() {
     cb(null, data);
   });
 
-  process.stdin.on('error', function(err) {
+  process.stdin.prependListener('error', function(err) {
     cb(err);
   });
 }
