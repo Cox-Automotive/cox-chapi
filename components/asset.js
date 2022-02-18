@@ -56,7 +56,7 @@ Asset.prototype.list_types = function(cb) {
  */
 Asset.prototype._list_types_cb = function(cb, err, result) {
   if (err) return cb(err, result);
-  cb(null, result.list);
+  cb(null, result);
 };
 
 /**
@@ -109,7 +109,7 @@ Asset.prototype.query = function(match, cb) {
  */
 Asset.prototype._query_cb = function(match, cb, err, result) {
   if (err) return cb(err, result);
-  cb(null, result.list);
+  cb(null, result);
 };
 
 /**
