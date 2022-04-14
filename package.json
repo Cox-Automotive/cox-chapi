@@ -4,7 +4,7 @@
   "description": "A node module that encapsulates API calls for cloudhealth",
   "main": "index.js",
   "dependencies": {
-    "async": "^2.0.1",
+    "async": "^3.2.2",
     "querystring": "^0.2.0"
   },
   "devDependencies": {
